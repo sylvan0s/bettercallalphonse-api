@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +11,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
- * @ApiResource
+ * @ApiResource(iri="http://schema.org/Question",
+ *              attributes={"order"={"id": "ASC"},
+ *                          "normalization_context"={"groups"={"questionRead"}},
+ *                          "denormalization_context"={"groups"={"questionWrite"}}
+ *                      },
+ *              collectionOperations={"get"={"method"="GET"}, "post"={"method"="POST"}},
+ *              itemOperations={"get"={"method"="GET"}, "delete"={"method"="DELETE"}, "put"={"method"="PUT"}}
+ *     )
  */
 class Question
 {
@@ -23,13 +31,17 @@ class Question
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"questionRead", "questionWrite"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @ApiProperty(iri="http://schema.org/value")
+     * @Groups({"questionRead", "questionWrite"})
      */
-    private $note_max;
+    private $noteMax;
 
     /**
     * @ORM\OneToMany(targetEntity="QuestionChoice", mappedBy="question")
@@ -60,12 +72,12 @@ class Question
 
     public function getNoteMax(): ?int
     {
-        return $this->note_max;
+        return $this->noteMax;
     }
 
-    public function setNoteMax(?int $note_max): self
+    public function setNoteMax(?int $noteMax): self
     {
-        $this->note_max = $note_max;
+        $this->noteMax = $noteMax;
 
         return $this;
     }
