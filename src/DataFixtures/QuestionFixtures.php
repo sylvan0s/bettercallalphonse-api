@@ -10,7 +10,7 @@ class QuestionFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // create 30 Question! Bam!
+        // create 50 Question ! Bam !
         for ($i = 0; $i < 50; $i++) {
             $question = new Question();
             $question->setLibelle('Question-' . $i);
