@@ -17,7 +17,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                          "denormalization_context"={"groups"={"questionWrite"}}
  *                      },
  *              collectionOperations={"get"={"method"="GET"}, "post"={"method"="POST"}},
- *              itemOperations={"get"={"method"="GET"}, "delete"={"method"="DELETE"}, "put"={"method"="PUT"}}
+ *              itemOperations={"get"={"method"="GET", "normalization_context"={"groups"={"questionRead"}}},
+ *                              "delete"={"method"="DELETE"},
+ *                              "put"={"method"="PUT"}}
  *     )
  */
 class Question
