@@ -180,6 +180,9 @@ api_platform:
         html:
             mime_types: ['text/html']
 
+        csv:
+            mime_types: ['text/csv']
+
         # ...
 
     # The list of enabled error formats. The first one will be the default.
