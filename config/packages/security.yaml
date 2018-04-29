@@ -1,13 +1,44 @@
 security:
+    # Nous commencons par déclarer un encodeur pour les utilisateur de type FSO\UserBundle\Model\UserInterface
+    # En fait la classe d'utilisateur que nous avons créée précédemment implémente cette interface à travers la
+    # classe BaseUser. C'est l'encodeur qui sera utilisé par FSOUserBundle pour faire correspondre les mots de
+    # passe rentrés par les utilisateurs avec celui stoké en base de données
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    # Nous déclarons ensuite un fornisseur, c'est à dire une source d'utilisateurs. Ces derniers seront
+    # stockés dans la base de données. Contrairement à in_memory, il faut faire appel à un service pour
+    # aller chercher les utilisateurs. Nous référencons le service grace à la clé id et le nom du service
+    # est fso_user.user_provider.username
     providers:
-        in_memory: { memory: ~ }
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        # Nous créons ensuite un pare-feu global pour toutes les URLs de l'application, qui utilise comme source de
+        # données l'utilisateurs le fornisseur déclaré précédement
         main:
-            anonymous: true
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                # To use, uncomment the `csrf_protection` section in
+                # config/packages/framework.yaml
+                csrf_token_generator: security.csrf.token_manager
+
+            logout:
+                path: fos_user_security_logout
+                target: fos_user_security_login
+            anonymous:    true
 
             # activate different ways to authenticate
 
@@ -19,6 +50,10 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    # La section access_control contient quand à elle les régles de contrôle d'accès pour l'application : nous indiquons
+    # qu'il faut pouvoir accéder sans authentification aux divers écrans liés aux pages de connexion
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, role: ROLE_ADMIN }

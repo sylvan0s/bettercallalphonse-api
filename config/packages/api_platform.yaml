@@ -1,6 +1,3 @@
-framework:
-    serializer: { enable_annotations: true }
-
 api_platform:
 
     # The title of the API.
