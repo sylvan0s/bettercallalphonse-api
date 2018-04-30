@@ -10,7 +10,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
- * @ApiResource
+ * @ApiResource(attributes={
+ *  "normalization_context"={"groups"={"question"}},
+ *  "denormalization_context"={"groups"={"question"}}
+ * })
  */
 class Question
 {
@@ -23,16 +26,19 @@ class Question
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"question"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"question"})
      */
-    private $note_max;
+    private $noteMax;
 
     /**
     * @ORM\OneToMany(targetEntity="QuestionChoice", mappedBy="question")
+    * @Groups({"question"})
     */
     private $questionChoices;
 
@@ -60,12 +66,12 @@ class Question
 
     public function getNoteMax(): ?int
     {
-        return $this->note_max;
+        return $this->noteMax;
     }
 
-    public function setNoteMax(?int $note_max): self
+    public function setNoteMax(?int $noteMax): self
     {
-        $this->note_max = $note_max;
+        $this->noteMax = $noteMax;
 
         return $this;
     }

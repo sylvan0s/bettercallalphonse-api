@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionChoiceRepository")
@@ -20,11 +21,13 @@ class QuestionChoice
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"question"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"question"})
      */
     private $note;
 
