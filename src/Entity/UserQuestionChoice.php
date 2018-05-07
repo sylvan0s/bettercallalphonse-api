@@ -20,7 +20,7 @@ class UserQuestionChoice
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_question_choice"})
+     * @Groups({"question", "user_question_choice"})
      */
     private $id;
 
