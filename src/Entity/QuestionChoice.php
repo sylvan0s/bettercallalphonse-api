@@ -16,6 +16,7 @@ class QuestionChoice
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"question", "user_question_choice"})
      */
     private $id;
 
