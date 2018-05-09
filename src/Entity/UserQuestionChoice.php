@@ -31,19 +31,19 @@ class UserQuestionChoice
     private $creationDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="userQuestionChoices")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userQuestionChoices", cascade={"persist"})
      * @Groups({"user_question_choice"})
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="QuestionChoice", inversedBy="userQuestionChoices")
+     * @ORM\ManyToOne(targetEntity="QuestionChoice", inversedBy="userQuestionChoices", cascade={"persist"})
      * @Groups({"user_question_choice"})
      */
     private $questionChoice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Question", inversedBy="userQuestionChoices")
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="userQuestionChoices", cascade={"persist"})
      * @Groups({"user_question_choice"})
      */
     private $question;
