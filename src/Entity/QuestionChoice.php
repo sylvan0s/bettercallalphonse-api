@@ -22,13 +22,13 @@ class QuestionChoice
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"question"})
+     * @Groups({"question", "user_question_choice"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"question"})
+     * @Groups({"question", "user_question_choice"})
      */
     private $note;
 

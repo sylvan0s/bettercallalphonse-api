@@ -33,7 +33,7 @@ class Question
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"question"})
+     * @Groups({"question", "user_question_choice"})
      */
     private $noteMax;
 

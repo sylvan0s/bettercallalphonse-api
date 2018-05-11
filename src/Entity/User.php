@@ -19,7 +19,7 @@ class User extends BaseUser
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_question_choice"})
+     * @Groups({"user_question_choice", "user_energy_choice"})
      */
     protected $id;
 
@@ -46,12 +46,19 @@ class User extends BaseUser
     /**
     * @ORM\OneToMany(targetEntity="UserQuestionChoice", mappedBy="user")
     */
-    private $userQuestionchoices;
+    private $userQuestionChoices;
+
+    /**
+    * @ORM\OneToMany(targetEntity="UserEnergyChoice", mappedBy="user")
+    */
+    private $userEnergyChoices;
 
     public function __construct()
     {
         parent::__construct();
         $this->userQuestionchoices = new ArrayCollection();
+        $this->userQuestionChoices = new ArrayCollection();
+        $this->userEnergyChoices = new ArrayCollection();
         // your own logic
     }
 
@@ -111,28 +118,59 @@ class User extends BaseUser
     /**
      * @return Collection|UserQuestionChoice[]
      */
-    public function getUserQuestionchoices(): Collection
+    public function getUserQuestionChoices(): Collection
     {
-        return $this->userQuestionchoices;
+        return $this->userQuestionChoices;
     }
 
-    public function addUserQuestionchoice(UserQuestionChoice $userQuestionchoice): self
+    public function addUserQuestionChoice(UserQuestionChoice $userQuestionChoice): self
     {
-        if (!$this->userQuestionchoices->contains($userQuestionchoice)) {
-            $this->userQuestionchoices[] = $userQuestionchoice;
-            $userQuestionchoice->setUser($this);
+        if (!$this->userQuestionChoices->contains($userQuestionChoice)) {
+            $this->userQuestionChoices[] = $userQuestionChoice;
+            $userQuestionChoice->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeUserQuestionchoice(UserQuestionChoice $userQuestionchoice): self
+    public function removeUserQuestionChoice(UserQuestionChoice $userQuestionChoice): self
     {
-        if ($this->userQuestionchoices->contains($userQuestionchoice)) {
-            $this->userQuestionchoices->removeElement($userQuestionchoice);
+        if ($this->userQuestionChoices->contains($userQuestionChoice)) {
+            $this->userQuestionChoices->removeElement($userQuestionChoice);
             // set the owning side to null (unless already changed)
-            if ($userQuestionchoice->getUser() === $this) {
-                $userQuestionchoice->setUser(null);
+            if ($userQuestionChoice->getUser() === $this) {
+                $userQuestionChoice->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserEnergyChoice[]
+     */
+    public function getUserEnergyChoices(): Collection
+    {
+        return $this->userEnergyChoices;
+    }
+
+    public function addUserEnergyChoice(UserEnergyChoice $userEnergyChoice): self
+    {
+        if (!$this->userEnergyChoices->contains($userEnergyChoice)) {
+            $this->userEnergyChoices[] = $userEnergyChoice;
+            $userEnergyChoice->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserEnergyChoice(UserEnergyChoice $userEnergyChoice): self
+    {
+        if ($this->userEnergyChoices->contains($userEnergyChoice)) {
+            $this->userEnergyChoices->removeElement($userEnergyChoice);
+            // set the owning side to null (unless already changed)
+            if ($userEnergyChoice->getUser() === $this) {
+                $userEnergyChoice->setUser(null);
             }
         }
 
