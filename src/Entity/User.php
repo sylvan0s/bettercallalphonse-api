@@ -5,13 +5,18 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
+use FOS\UserBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ApiResource
+ * @ApiResource(attributes={
+ *  "force_eager"=false,
+ *  "normalization_context"={"groups"={"user"}},
+ *  "denormalization_context"={"groups"={"user"}}
+ * })
  */
 class User extends BaseUser
 {
@@ -19,39 +24,83 @@ class User extends BaseUser
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_question_choice", "user_energy_choice"})
+     * @Groups({"user", "user_question_choice", "user_energy_choice", "user_suggestion", "user_suggestion_like", "user_suggestion_mega_like"})
      */
     protected $id;
 
     /**
+     * @Groups({"user", "user_suggestion", "user_question_choice"})
+     */
+    protected $username;
+
+    /**
+     * @Groups({"user"})
+     */
+    protected $email;
+
+    /**
+     * @Groups({"user"})
+     */
+    protected $roles;
+
+    /**
+     * @Groups({"user"})
+     */
+    protected $lastLogin;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"user"})
      */
     private $birthdate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"user"})
      */
     private $dateEntry;
 
     /**
     * @ORM\OneToMany(targetEntity="UserQuestionChoice", mappedBy="user")
+    * @Groups({"user"})
     */
     private $userQuestionChoices;
 
     /**
     * @ORM\OneToMany(targetEntity="UserEnergyChoice", mappedBy="user")
+    * @Groups({"user"})
     */
     private $userEnergyChoices;
+
+    /**
+    * @ORM\OneToMany(targetEntity="UserSuggestion", mappedBy="user")
+    * @Groups({"user"})
+    */
+    private $userSuggestions;
+
+    /**
+    * @ORM\OneToMany(targetEntity="UserSuggestionLike", mappedBy="user")
+    * @Groups({"user"})
+    */
+    private $userSuggestionsLike;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserSuggestionMegaLike", mappedBy="user")
+     * @Groups({"user"})
+     */
+    private $userSuggestionsMegaLike;
 
     public function __construct()
     {
@@ -59,6 +108,9 @@ class User extends BaseUser
         $this->userQuestionchoices = new ArrayCollection();
         $this->userQuestionChoices = new ArrayCollection();
         $this->userEnergyChoices = new ArrayCollection();
+        $this->userSuggestions = new ArrayCollection();
+        $this->userSuggestionsLike = new ArrayCollection();
+        $this->userSuggestionsMegaLike = new ArrayCollection();
         // your own logic
     }
 
@@ -171,6 +223,99 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($userEnergyChoice->getUser() === $this) {
                 $userEnergyChoice->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserSuggestion[]
+     */
+    public function getUserSuggestions(): Collection
+    {
+        return $this->userSuggestions;
+    }
+
+    public function addUserSuggestion(UserSuggestion $userSuggestion): self
+    {
+        if (!$this->userSuggestions->contains($userSuggestion)) {
+            $this->userSuggestions[] = $userSuggestion;
+            $userSuggestion->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSuggestion(UserSuggestion $userSuggestion): self
+    {
+        if ($this->userSuggestions->contains($userSuggestion)) {
+            $this->userSuggestions->removeElement($userSuggestion);
+            // set the owning side to null (unless already changed)
+            if ($userSuggestion->getUser() === $this) {
+                $userSuggestion->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserSuggestionLike[]
+     */
+    public function getUserSuggestionsLike(): Collection
+    {
+        return $this->userSuggestionsLike;
+    }
+
+    public function addUserSuggestionsLike(UserSuggestionLike $userSuggestionsLike): self
+    {
+        if (!$this->userSuggestionsLike->contains($userSuggestionsLike)) {
+            $this->userSuggestionsLike[] = $userSuggestionsLike;
+            $userSuggestionsLike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSuggestionsLike(UserSuggestionLike $userSuggestionsLike): self
+    {
+        if ($this->userSuggestionsLike->contains($userSuggestionsLike)) {
+            $this->userSuggestionsLike->removeElement($userSuggestionsLike);
+            // set the owning side to null (unless already changed)
+            if ($userSuggestionsLike->getUser() === $this) {
+                $userSuggestionsLike->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserSuggestionMegaLike[]
+     */
+    public function getUserSuggestionsMegaLike(): Collection
+    {
+        return $this->userSuggestionsMegaLike;
+    }
+
+    public function addUserSuggestionsMegaLike(UserSuggestionMegaLike $userSuggestionsMegaLike): self
+    {
+        if (!$this->userSuggestionsMegaLike->contains($userSuggestionsMegaLike)) {
+            $this->userSuggestionsMegaLike[] = $userSuggestionsMegaLike;
+            $userSuggestionsMegaLike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSuggestionsMegaLike(UserSuggestionMegaLike $userSuggestionsMegaLike): self
+    {
+        if ($this->userSuggestionsMegaLike->contains($userSuggestionsMegaLike)) {
+            $this->userSuggestionsMegaLike->removeElement($userSuggestionsMegaLike);
+            // set the owning side to null (unless already changed)
+            if ($userSuggestionsMegaLike->getUser() === $this) {
+                $userSuggestionsMegaLike->setUser(null);
             }
         }
 

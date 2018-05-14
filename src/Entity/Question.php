@@ -27,7 +27,7 @@ class Question
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"question"})
+     * @Groups({"question", "user_question_choice"})
      */
     private $libelle;
 
