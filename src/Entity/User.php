@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user"}},
  *    "denormalization_context"={"groups"={"user"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "access_control"="is_granted('ROLE_COLLAB')"
  *  },
  *  collectionOperations={
  *    "get",

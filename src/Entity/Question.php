@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *    "normalization_context"={"groups"={"question"}},
  *    "denormalization_context"={"groups"={"question"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "access_control"="is_granted('ROLE_COLLAB')"
  *  }
  *)
  */

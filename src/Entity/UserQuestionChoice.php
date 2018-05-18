@@ -13,7 +13,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_question_choice"}},
  *    "denormalization_context"={"groups"={"user_question_choice"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "access_control"="is_granted('ROLE_COLLAB')",
+ *    "order"={"user.username": "ASC", "creationDate": "ASC"}
  *  },
  *  collectionOperations={
  *    "get",

@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *    "normalization_context"={"groups"={"question_choice"}},
  *    "denormalization_context"={"groups"={"question_choice"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "access_control"="is_granted('ROLE_COLLAB')"
  *  }
  *)
  */

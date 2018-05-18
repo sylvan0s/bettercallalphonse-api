@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_suggestion_like"}},
  *    "denormalization_context"={"groups"={"user_suggestion_like"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "access_control"="is_granted('ROLE_COLLAB')"
  *  },
  *  collectionOperations={
  *    "get"={
