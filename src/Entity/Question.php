@@ -10,10 +10,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
- * @ApiResource(attributes={
- *  "normalization_context"={"groups"={"question"}},
- *  "denormalization_context"={"groups"={"question"}}
- * })
+ * @ApiResource(
+ *  attributes={
+ *    "normalization_context"={"groups"={"question"}},
+ *    "denormalization_context"={"groups"={"question"}},
+ *    "access_control"="is_granted('ROLE_ADMIN')"
+ *  }
+ *)
  */
 class Question
 {

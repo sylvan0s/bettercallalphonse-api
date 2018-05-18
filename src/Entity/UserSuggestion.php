@@ -8,11 +8,25 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserSuggestionRepository")
- * @ApiResource(attributes={
- *  "force_eager"=false,
- *  "normalization_context"={"groups"={"user_suggestion"}},
- *  "denormalization_context"={"groups"={"user_suggestion"}}
- * })
+ * @ApiResource(
+ *  attributes={
+ *    "force_eager"=false,
+ *    "normalization_context"={"groups"={"user_suggestion"}},
+ *    "denormalization_context"={"groups"={"user_suggestion"}},
+ *    "access_control"="is_granted('ROLE_ADMIN')"
+ *  },
+ *  collectionOperations={
+ *    "get"={
+ *      "method"="GET",
+ *      "access_control_message"="Only collab can see all ideas."
+ *    },
+ *    "post"={
+ *      "method"="POST",
+ *      "access_control"="object.getUser() == user",
+ *      "access_control_message"="Only collab can send an idea."
+ *    }
+ *  }
+ *)
  */
 class UserSuggestion
 {

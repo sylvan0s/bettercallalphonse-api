@@ -12,11 +12,21 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ApiResource(attributes={
- *  "force_eager"=false,
- *  "normalization_context"={"groups"={"user"}},
- *  "denormalization_context"={"groups"={"user"}}
- * })
+ * @ApiResource(
+ *  attributes={
+ *    "force_eager"=false,
+ *    "normalization_context"={"groups"={"user"}},
+ *    "denormalization_context"={"groups"={"user"}},
+ *    "access_control"="is_granted('ROLE_ADMIN')"
+ *  },
+ *  collectionOperations={
+ *    "get",
+ *    "post"={
+ *      "method"="POST",
+ *      "access_control"="object.getUser() == user"
+ *    }
+ *  }
+ *)
  */
 class User extends BaseUser
 {

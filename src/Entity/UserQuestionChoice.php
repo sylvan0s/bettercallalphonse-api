@@ -8,11 +8,21 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserQuestionChoiceRepository")
- * @ApiResource(attributes={
- *  "force_eager"=false,
- *  "normalization_context"={"groups"={"user_question_choice"}},
- *  "denormalization_context"={"groups"={"user_question_choice"}}
- * })
+ * @ApiResource(
+ *  attributes={
+ *    "force_eager"=false,
+ *    "normalization_context"={"groups"={"user_question_choice"}},
+ *    "denormalization_context"={"groups"={"user_question_choice"}},
+ *    "access_control"="is_granted('ROLE_ADMIN')"
+ *  },
+ *  collectionOperations={
+ *    "get",
+ *    "post"={
+ *      "method"="POST",
+ *      "access_control"="object.getUser() == user"
+ *    }
+ *  }
+ *)
  */
 class UserQuestionChoice
 {

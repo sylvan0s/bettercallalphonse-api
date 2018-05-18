@@ -8,11 +8,21 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserSuggestionMegaLikeRepository")
- * @ApiResource(attributes={
- *  "force_eager"=false,
- *  "normalization_context"={"groups"={"user_suggestion_mega_like"}},
- *  "denormalization_context"={"groups"={"user_suggestion_mega_like"}}
- * })
+ * @ApiResource(
+ *  attributes={
+ *    "force_eager"=false,
+ *    "normalization_context"={"groups"={"user_suggestion_mega_like"}},
+ *    "denormalization_context"={"groups"={"user_suggestion_mega_like"}},
+ *    "access_control"="is_granted('ROLE_ADMIN')"
+ *  },
+ *  collectionOperations={
+ *    "get",
+ *    "post"={
+ *      "method"="POST",
+ *      "access_control"="object.getUser() == user"
+ *    }
+ *  }
+ *)
  */
 class UserSuggestionMegaLike
 {

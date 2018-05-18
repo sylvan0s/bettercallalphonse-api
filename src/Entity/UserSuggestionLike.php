@@ -8,11 +8,25 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserSuggestionLikeRepository")
- * @ApiResource(attributes={
- *  "force_eager"=false,
- *  "normalization_context"={"groups"={"user_suggestion_like"}},
- *  "denormalization_context"={"groups"={"user_suggestion_like"}}
- * })
+ * @ApiResource(
+ *  attributes={
+ *    "force_eager"=false,
+ *    "normalization_context"={"groups"={"user_suggestion_like"}},
+ *    "denormalization_context"={"groups"={"user_suggestion_like"}},
+ *    "access_control"="is_granted('ROLE_ADMIN')"
+ *  },
+ *  collectionOperations={
+ *    "get"={
+ *      "method"="GET",
+ *      "access_control_message"="Only collab can see all likes."
+ *    },
+ *    "post"={
+ *      "method"="POST",
+ *      "access_control"="object.getUser() == user",
+ *      "access_control_message"="Only collab can add a like."
+ *    }
+ *  }
+ *)
  */
 class UserSuggestionLike
 {

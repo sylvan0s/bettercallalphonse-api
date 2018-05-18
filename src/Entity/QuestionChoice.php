@@ -8,7 +8,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionChoiceRepository")
- * @ApiResource
+ * @ApiResource(
+ *  attributes={
+ *    "normalization_context"={"groups"={"question_choice"}},
+ *    "denormalization_context"={"groups"={"question_choice"}},
+ *    "access_control"="is_granted('ROLE_ADMIN')"
+ *  }
+ *)
  */
 class QuestionChoice
 {
@@ -16,24 +22,25 @@ class QuestionChoice
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"question", "user_question_choice"})
+     * @Groups({"question", "question_choice", "user_question_choice"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"question", "user_question_choice"})
+     * @Groups({"question", "question_choice", "user_question_choice"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"question", "user_question_choice"})
+     * @Groups({"question", "question_choice", "user_question_choice"})
      */
     private $note;
 
     /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="questionChoices")
+     * @Groups({"question_choice"})
      */
     private $question;
 
