@@ -15,6 +15,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "normalization_context"={"groups"={"question"}},
  *    "denormalization_context"={"groups"={"question"}},
  *    "access_control"="is_granted('ROLE_COLLAB')"
+ *  },
+ *  collectionOperations={
+ *    "get"={
+ *      "method"="GET",
+ *      "access_control_message"="Only collab can see all questions."
+ *    }
  *  }
  *)
  */
