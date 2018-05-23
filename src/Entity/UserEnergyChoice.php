@@ -16,7 +16,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "access_control"="is_granted('ROLE_COLLAB')"
  *  },
  *  collectionOperations={
- *    "get",
+ *    "get"={
+ *      "method"="GET",
+ *      "access_control_message"="Only collab can see all user energy choices."
+ *    },
  *    "post"={
  *      "method"="POST",
  *      "access_control"="object.getUser() == user"

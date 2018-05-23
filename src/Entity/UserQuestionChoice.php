@@ -17,7 +17,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "order"={"user.username": "ASC", "creationDate": "ASC"}
  *  },
  *  collectionOperations={
- *    "get",
+ *    "get"={
+ *      "method"="GET",
+ *      "access_control_message"="Only collab can see all user question choices."
+ *    },
  *    "post"={
  *      "method"="POST",
  *      "access_control"="object.getUser() == user"
