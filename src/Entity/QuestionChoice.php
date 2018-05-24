@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"question_choiceRead"}},
  *    "denormalization_context"={"groups"={"question_choiceWrite"}},
- *    "access_control"="is_granted('ROLE_COLLAB')"
+ *    "access_control"="is_granted('ROLE_ADMIN')"
  *  },
  *  collectionOperations={
  *    "get"={
@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="is_granted('ROLE_SIEGE')",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can post question choices."
  *    }
  *  },
@@ -34,11 +34,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "put"={
  *      "method"="PUT",
- *      "access_control_message"="Only collab can modify an idea."
+ *      "access_control_message"="Only collab can modify a question choice."
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete an idea."
+ *      "access_control_message"="Only collab can delete a question choice."
  *    }
  *  }
  *)

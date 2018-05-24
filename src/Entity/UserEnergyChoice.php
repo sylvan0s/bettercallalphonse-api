@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_energy_choiceRead"}},
  *    "denormalization_context"={"groups"={"user_energy_choiceWrite"}},
- *    "access_control"="is_granted('ROLE_COLLAB')"
+ *    "access_control"="is_granted('ROLE_ADMIN')"
  *  },
  *  collectionOperations={
  *    "get"={
@@ -33,11 +33,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "put"={
  *      "method"="PUT",
- *      "access_control_message"="Only collab can modify an idea."
+ *      "access_control_message"="Only collab can modify an user energy choice."
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete an idea."
+ *      "access_control_message"="Only collab can delete an user energy choice."
  *    }
  *  }
  *)

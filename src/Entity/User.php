@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"userRead"}},
  *    "denormalization_context"={"groups"={"userWrite"}},
- *    "access_control"="is_granted('ROLE_COLLAB')"
+ *    "access_control"="is_granted('ROLE_ADMIN')"
  *  },
  *  collectionOperations={
  *    "get"={
@@ -27,7 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="is_granted('ROLE_SIEGE')",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can post users."
  *    }
  *  },
@@ -38,11 +38,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "put"={
  *      "method"="PUT",
- *      "access_control_message"="Only collab can modify an idea."
+ *      "access_control_message"="Only collab can modify an user."
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete an idea."
+ *      "access_control_message"="Only collab can delete an user."
  *    }
  *  }
  *)

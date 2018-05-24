@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_suggestion_mega_likeRead"}},
  *    "denormalization_context"={"groups"={"user_suggestion_mega_likeWrite"}},
- *    "access_control"="is_granted('ROLE_COLLAB')"
+ *    "access_control"="is_granted('ROLE_ADMIN')"
  *  },
  *  collectionOperations={
  *    "get"={
@@ -34,11 +34,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "put"={
  *      "method"="PUT",
- *      "access_control_message"="Only collab can modify an idea."
+ *      "access_control_message"="Only collab can modify a mega like."
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete an idea."
+ *      "access_control_message"="Only collab can delete a mega like."
  *    }
  *  }
  *)
