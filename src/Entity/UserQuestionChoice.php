@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="is_granted('ROLE_ADMIN') and object.getUser() == user",
+ *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only collab can post an user question choice."
  *    }
  *  },
