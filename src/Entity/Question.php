@@ -12,14 +12,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
  * @ApiResource(
  *  attributes={
- *    "normalization_context"={"groups"={"question"}},
- *    "denormalization_context"={"groups"={"question"}},
+ *    "normalization_context"={"groups"={"questionRead"}},
+ *    "denormalization_context"={"groups"={"questionWrite"}},
  *    "access_control"="is_granted('ROLE_SIEGE')"
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"question"}},
+ *      "normalization_context"={"groups"={"questionRead"}},
  *      "access_control_message"="Only collab can see all questions."
  *    },
  *    "post"={
@@ -31,7 +31,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"question"}},
+ *      "normalization_context"={"groups"={"questionRead"}},
  *      "access_control"="is_granted('ROLE_COLLAB')"
  *    },
  *    "put"={
@@ -51,25 +51,25 @@ class Question
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"question", "user_question_choice"})
+     * @Groups({"questionRead", "questionWrite", "question_choiceRead", "user_question_choiceRead"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"question", "user_question_choice"})
+     * @Groups({"questionRead", "questionWrite", "question_choiceRead", "user_question_choiceRead"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"question", "user_question_choice"})
+     * @Groups({"questionRead", "questionWrite", "question_choiceRead", "user_question_choiceRead"})
      */
     private $noteMax;
 
     /**
     * @ORM\OneToMany(targetEntity="QuestionChoice", mappedBy="question")
-    * @Groups({"question"})
+    * @Groups({"questionRead"})
     */
     private $questionChoices;
 

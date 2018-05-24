@@ -10,14 +10,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\QuestionChoiceRepository")
  * @ApiResource(
  *  attributes={
- *    "normalization_context"={"groups"={"question_choice"}},
- *    "denormalization_context"={"groups"={"question_choice"}},
+ *    "force_eager"=false,
+ *    "normalization_context"={"groups"={"question_choiceRead"}},
+ *    "denormalization_context"={"groups"={"question_choiceWrite"}},
  *    "access_control"="is_granted('ROLE_COLLAB')"
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"question_choice"}},
+ *      "normalization_context"={"groups"={"question_choiceRead"}},
  *      "access_control_message"="Only collab can see all question choices."
  *    },
  *    "post"={
@@ -29,7 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"question_choice"}},
+ *      "normalization_context"={"groups"={"question_choiceRead"}},
  *    },
  *    "put"={
  *      "method"="PUT",
@@ -48,25 +49,25 @@ class QuestionChoice
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"question", "question_choice", "user_question_choice"})
+     * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "user_question_choiceRead"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"question", "question_choice", "user_question_choice"})
+     * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "user_question_choiceRead"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"question", "question_choice", "user_question_choice"})
+     * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "user_question_choiceRead"})
      */
     private $note;
 
     /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="questionChoices")
-     * @Groups({"question_choice"})
+     * @Groups({"question_choiceRead"})
      */
     private $question;
 

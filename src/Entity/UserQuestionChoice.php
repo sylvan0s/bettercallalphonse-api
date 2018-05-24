@@ -11,15 +11,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"user_question_choice"}},
- *    "denormalization_context"={"groups"={"user_question_choice"}},
+ *    "normalization_context"={"groups"={"user_question_choiceRead"}},
+ *    "denormalization_context"={"groups"={"user_question_choiceWrite"}},
  *    "access_control"="is_granted('ROLE_COLLAB')",
  *    "order"={"user.username": "ASC", "creationDate": "ASC"}
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user_question_choice"}},
+ *      "normalization_context"={"groups"={"user_question_choiceRead"}},
  *      "access_control_message"="Only collab can see all user question choices."
  *    },
  *    "post"={
@@ -30,7 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user_question_choice"}},
+ *      "normalization_context"={"groups"={"user_question_choiceRead"}},
  *    },
  *    "put"={
  *      "method"="PUT",
@@ -49,31 +49,31 @@ class UserQuestionChoice
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"question", "user_question_choice"})
+     * @Groups({"questionRead", "user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_question_choice"})
+     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $creationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userQuestionChoices")
-     * @Groups({"user_question_choice"})
+     * @Groups({"user_question_choiceRead"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="QuestionChoice", inversedBy="userQuestionChoices")
-     * @Groups({"user_question_choice"})
+     * @Groups({"user_question_choiceRead"})
      */
     private $questionChoice;
 
     /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="userQuestionChoices")
-     * @Groups({"user_question_choice"})
+     * @Groups({"user_question_choiceRead"})
      */
     private $question;
 

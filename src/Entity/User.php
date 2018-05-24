@@ -15,14 +15,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"user"}},
- *    "denormalization_context"={"groups"={"user"}},
+ *    "normalization_context"={"groups"={"userRead"}},
+ *    "denormalization_context"={"groups"={"userWrite"}},
  *    "access_control"="is_granted('ROLE_COLLAB')"
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user"}},
+ *      "normalization_context"={"groups"={"userRead"}},
  *      "access_control_message"="Only collab can see all users."
  *    },
  *    "post"={
@@ -34,7 +34,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user"}},
+ *      "normalization_context"={"groups"={"userRead"}},
  *    },
  *    "put"={
  *      "method"="PUT",
@@ -53,81 +53,81 @@ class User extends BaseUser
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user", "user_question_choice", "user_energy_choice", "user_suggestion", "user_suggestion_like", "user_suggestion_mega_like"})
+     * @Groups({"userRead", "user_question_choiceRead", "user_energy_choiceRead", "user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
      */
     protected $id;
 
     /**
-     * @Groups({"user", "user_suggestion", "user_question_choice"})
+     * @Groups({"userRead", "user_suggestionRead", "user_question_choiceRead"})
      */
     protected $username;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"userRead"})
      */
     protected $email;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"userRead"})
      */
     protected $roles;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"userRead"})
      */
     protected $lastLogin;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user"})
+     * @Groups({"userRead", "userWrite"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user"})
+     * @Groups({"userRead", "userWrite"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user"})
+     * @Groups({"userRead", "userWrite"})
      */
     private $birthdate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user"})
+     * @Groups({"userRead", "userWrite"})
      */
     private $dateEntry;
 
     /**
     * @ORM\OneToMany(targetEntity="UserQuestionChoice", mappedBy="user")
-    * @Groups({"user"})
+    * @Groups({"userRead"})
     */
     private $userQuestionChoices;
 
     /**
     * @ORM\OneToMany(targetEntity="UserEnergyChoice", mappedBy="user")
-    * @Groups({"user"})
+    * @Groups({"userRead"})
     */
     private $userEnergyChoices;
 
     /**
     * @ORM\OneToMany(targetEntity="UserSuggestion", mappedBy="user")
-    * @Groups({"user"})
+    * @Groups({"userRead"})
     */
     private $userSuggestions;
 
     /**
     * @ORM\OneToMany(targetEntity="UserSuggestionLike", mappedBy="user")
-    * @Groups({"user"})
+    * @Groups({"userRead"})
     */
     private $userSuggestionsLike;
 
     /**
      * @ORM\OneToMany(targetEntity="UserSuggestionMegaLike", mappedBy="user")
-     * @Groups({"user"})
+     * @Groups({"userRead"})
      */
     private $userSuggestionsMegaLike;
 

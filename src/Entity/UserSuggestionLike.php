@@ -11,14 +11,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"user_suggestion_like"}},
- *    "denormalization_context"={"groups"={"user_suggestion_like"}},
+ *    "normalization_context"={"groups"={"user_suggestion_likeRead"}},
+ *    "denormalization_context"={"groups"={"user_suggestion_likeWrite"}},
  *    "access_control"="is_granted('ROLE_COLLAB')"
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user_suggestion_like"}},
+ *      "normalization_context"={"groups"={"user_suggestion_likeRead"}},
  *      "access_control_message"="Only collab can see all likes."
  *    },
  *    "post"={
@@ -30,7 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user_suggestion_like"}},
+ *      "normalization_context"={"groups"={"user_suggestion_likeRead"}},
  *    },
  *    "put"={
  *      "method"="PUT",
@@ -49,25 +49,25 @@ class UserSuggestionLike
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_suggestion_like"})
+     * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_suggestion_like"})
+     * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $creationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestionsLike")
-     * @Groups({"user_suggestion_like"})
+     * @Groups({"user_suggestion_likeRead"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestion", inversedBy="userSuggestionsLike")
-     * @Groups({"user_suggestion_like"})
+     * @Groups({"user_suggestion_likeRead"})
      */
     private $suggestion;
 

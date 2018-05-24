@@ -11,14 +11,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"user_suggestion"}},
- *    "denormalization_context"={"groups"={"user_suggestion"}},
+ *    "normalization_context"={"groups"={"user_suggestionRead"}},
+ *    "denormalization_context"={"groups"={"user_suggestionWrite"}},
  *    "access_control"="is_granted('ROLE_COLLAB')"
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user_suggestion"}},
+ *      "normalization_context"={"groups"={"user_suggestionRead"}},
  *      "access_control_message"="Only collab can see all ideas."
  *    },
  *    "post"={
@@ -30,7 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user_suggestion"}},
+ *      "normalization_context"={"groups"={"user_suggestionRead"}},
  *    },
  *    "put"={
  *      "method"="PUT",
@@ -49,37 +49,37 @@ class UserSuggestion
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_suggestion", "user_suggestion_like", "user_suggestion_mega_like"})
+     * @Groups({"user_suggestionRead", "user_suggestionWrite", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"user_suggestion"})
+     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
      */
     private $suggestion;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_suggestion"})
+     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
      */
     private $creationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestions")
-     * @Groups({"user_suggestion", "user_suggestion_like", "user_suggestion_mega_like"})
+     * @Groups({"user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestionLike", inversedBy="suggestion")
-     * @Groups({"user_suggestion"})
+     * @Groups({"user_suggestionRead"})
      */
     private $userSuggestionsLike;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestionMegaLike", inversedBy="suggestion")
-     * @Groups({"user_suggestion"})
+     * @Groups({"user_suggestionRead"})
      */
     private $userSuggestionsMegaLike;
 

@@ -11,14 +11,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"user_energy_choice"}},
- *    "denormalization_context"={"groups"={"user_energy_choice"}},
+ *    "normalization_context"={"groups"={"user_energy_choiceRead"}},
+ *    "denormalization_context"={"groups"={"user_energy_choiceWrite"}},
  *    "access_control"="is_granted('ROLE_COLLAB')"
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user_energy_choice"}},
+ *      "normalization_context"={"groups"={"user_energy_choiceRead"}},
  *      "access_control_message"="Only collab can see all user energy choices."
  *    },
  *    "post"={
@@ -29,7 +29,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"user_energy_choice"}},
+ *      "normalization_context"={"groups"={"user_energy_choiceRead"}},
  *    },
  *    "put"={
  *      "method"="PUT",
@@ -48,25 +48,25 @@ class UserEnergyChoice
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_energy_choice"})
+     * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"user_energy_choice"})
+     * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite"})
      */
     private $note;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_energy_choice"})
+     * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite"})
      */
     private $creationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userEnergyChoices")
-     * @Groups({"user_energy_choice"})
+     * @Groups({"user_energy_choiceRead"})
      */
     private $user;
 
