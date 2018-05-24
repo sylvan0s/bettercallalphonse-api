@@ -17,7 +17,27 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
+ *      "normalization_context"={"groups"={"question_choice"}},
  *      "access_control_message"="Only collab can see all question choices."
+ *    },
+ *    "post"={
+ *      "method"="POST",
+ *      "access_control"="is_granted('ROLE_SIEGE')",
+ *      "access_control_message"="Only admins can post question choices."
+ *    }
+ *  },
+ *  itemOperations={
+ *    "get"={
+ *      "method"="GET",
+ *      "normalization_context"={"groups"={"question_choice"}},
+ *    },
+ *    "put"={
+ *      "method"="PUT",
+ *      "access_control_message"="Only collab can modify an idea."
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control_message"="Only collab can delete an idea."
  *    }
  *  }
  *)

@@ -22,11 +22,27 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
+ *      "normalization_context"={"groups"={"user"}},
  *      "access_control_message"="Only collab can see all users."
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="object.getUser() == user"
+ *      "access_control"="is_granted('ROLE_SIEGE')",
+ *      "access_control_message"="Only admins can post users."
+ *    }
+ *  },
+ *  itemOperations={
+ *    "get"={
+ *      "method"="GET",
+ *      "normalization_context"={"groups"={"user"}},
+ *    },
+ *    "put"={
+ *      "method"="PUT",
+ *      "access_control_message"="Only collab can modify an idea."
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control_message"="Only collab can delete an idea."
  *    }
  *  }
  *)

@@ -18,12 +18,27 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
+ *      "normalization_context"={"groups"={"user_suggestion_mega_like"}},
  *      "access_control_message"="Only collab can see all megalikes."
  *    },
  *    "post"={
  *      "method"="POST",
  *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only collab can add a megalike."
+ *    }
+ *  },
+ *  itemOperations={
+ *    "get"={
+ *      "method"="GET",
+ *      "normalization_context"={"groups"={"user_suggestion_mega_like"}},
+ *    },
+ *    "put"={
+ *      "method"="PUT",
+ *      "access_control_message"="Only collab can modify an idea."
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control_message"="Only collab can delete an idea."
  *    }
  *  }
  *)
