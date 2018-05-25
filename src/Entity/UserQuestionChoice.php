@@ -36,10 +36,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "put"={
  *      "method"="PUT",
  *      "access_control_message"="Only collab can modify an user question choice."
- *    },
- *    "delete"={
- *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete an user question choice."
  *    }
  *  }
  *)

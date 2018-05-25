@@ -35,14 +35,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"userRead"}},
- *    },
- *    "put"={
- *      "method"="PUT",
- *      "access_control_message"="Only collab can modify an user."
- *    },
- *    "delete"={
- *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete an user."
  *    }
  *  }
  *)

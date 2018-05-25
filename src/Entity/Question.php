@@ -33,14 +33,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"questionRead"}},
  *      "access_control"="is_granted('ROLE_ADMIN')"
- *    },
- *    "put"={
- *      "method"="PUT",
- *      "access_control_message"="Only collab can modify a question."
- *    },
- *    "delete"={
- *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete a question."
  *    }
  *  }
  *)

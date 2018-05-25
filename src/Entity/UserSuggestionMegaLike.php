@@ -32,10 +32,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestion_mega_likeRead"}},
  *    },
- *    "put"={
- *      "method"="PUT",
- *      "access_control_message"="Only collab can modify a mega like."
- *    },
  *    "delete"={
  *      "method"="DELETE",
  *      "access_control_message"="Only collab can delete a mega like."

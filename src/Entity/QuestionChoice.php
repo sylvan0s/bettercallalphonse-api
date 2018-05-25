@@ -30,15 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"question_choiceRead"}},
- *    },
- *    "put"={
- *      "method"="PUT",
- *      "access_control_message"="Only collab can modify a question choice."
- *    },
- *    "delete"={
- *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete a question choice."
+ *      "normalization_context"={"groups"={"question_choiceRead"}}
  *    }
  *  }
  *)
