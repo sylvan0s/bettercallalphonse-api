@@ -67,6 +67,7 @@ class UserSuggestion extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestions")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     *
      * @Groups({"user_suggestionRead", "user_suggestionWrite"})
      */
     private $user;

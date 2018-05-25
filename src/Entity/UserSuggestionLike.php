@@ -58,6 +58,7 @@ class UserSuggestionLike extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestionsLike")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     *
      * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $user;
@@ -65,6 +66,7 @@ class UserSuggestionLike extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestion", inversedBy="userSuggestionsLike")
      * @ORM\JoinColumn(name="suggestion_id", referencedColumnName="id", nullable=false)
+     *
      * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $suggestion;
