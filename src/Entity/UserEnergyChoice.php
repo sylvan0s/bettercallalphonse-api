@@ -66,7 +66,7 @@ class UserEnergyChoice
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userEnergyChoices")
-     * @Groups({"user_energy_choiceRead"})
+     * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite"})
      */
     private $user;
 
