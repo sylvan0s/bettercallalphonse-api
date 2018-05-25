@@ -62,19 +62,19 @@ class UserQuestionChoice
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userQuestionChoices")
-     * @Groups({"user_question_choiceRead"})
+     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="QuestionChoice", inversedBy="userQuestionChoices")
-     * @Groups({"user_question_choiceRead"})
+     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $questionChoice;
 
     /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="userQuestionChoices")
-     * @Groups({"user_question_choiceRead"})
+     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $question;
 

@@ -61,13 +61,13 @@ class UserSuggestionLike
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestionsLike")
-     * @Groups({"user_suggestion_likeRead"})
+     * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestion", inversedBy="userSuggestionsLike")
-     * @Groups({"user_suggestion_likeRead"})
+     * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $suggestion;
 

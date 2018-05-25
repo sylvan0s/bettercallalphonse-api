@@ -61,13 +61,13 @@ class UserSuggestionMegaLike
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestionsMegaLike")
-     * @Groups({"user_suggestion_mega_likeRead"})
+     * @Groups({"user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestion", inversedBy="userSuggestionsMegaLike")
-     * @Groups({"user_suggestion_mega_likeRead"})
+     * @Groups({"user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"})
      */
     private $suggestion;
 
