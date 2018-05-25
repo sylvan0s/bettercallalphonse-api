@@ -34,10 +34,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "normalization_context"={"groups"={"user_suggestion_likeRead"}},
  *      "access_control_message"="Only owner can see a like.",
  *    },
- *    "put"={
- *      "method"="PUT",
- *      "access_control_message"="Only owner can modify a like."
- *    },
  *    "delete"={
  *      "method"="DELETE",
  *      "access_control_message"="Only owner can delete a like."

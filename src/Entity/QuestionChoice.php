@@ -31,14 +31,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"question_choiceRead"}},
  *      "access_control_message"="Only admins can see question choices."
- *    },
- *    "put"={
- *      "method"="PUT",
- *      "access_control_message"="Only admins can modify a question choice."
- *    },
- *    "delete"={
- *      "method"="DELETE",
- *      "access_control_message"="Only admins can delete a question choice."
  *    }
  *  }
  *)

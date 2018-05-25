@@ -36,14 +36,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestionRead"}},
  *      "access_control_message"="Only owner can see an idea.",
- *    },
- *    "put"={
- *      "method"="PUT",
- *      "access_control_message"="Only owner can modify an idea."
- *    },
- *    "delete"={
- *      "method"="DELETE",
- *      "access_control_message"="Only owner can delete an idea."
  *    }
  *  }
  *)

@@ -32,14 +32,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"questionRead"}},
  *      "access_control_message"="Only admins can see a question."
- *    },
- *    "put"={
- *      "method"="PUT",
- *      "access_control_message"="Only admins can modify a question."
- *    },
- *    "delete"={
- *      "method"="DELETE",
- *      "access_control_message"="Only admins can delete a question."
  *    }
  *  }
  *)
