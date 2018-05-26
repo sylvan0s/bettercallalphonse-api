@@ -23,26 +23,26 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"userRead"}},
- *      "access_control_message"="Only collab can see all users."
+ *      "access_control_message"="Only admins can see all users."
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="is_granted('ROLE_ADMIN')",
- *      "access_control_message"="Only admins can post users."
+ *      "access_control_message"="Only admins can create users."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"userRead"}},
+ *      "access_control_message"="Only admins can see user."
  *    },
  *    "put"={
  *      "method"="PUT",
- *      "access_control_message"="Only collab can modify an user."
+ *      "access_control_message"="Only admins can modify an user."
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete an user."
+ *      "access_control_message"="Only admins can delete an user."
  *    }
  *  }
  *)
