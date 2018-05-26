@@ -61,7 +61,6 @@ class UserSuggestionMegaLike extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestion", inversedBy="userSuggestionsMegaLike")
      * @ORM\JoinColumn(name="suggestion_id", referencedColumnName="id", nullable=false)
-     *
      * @Groups({"user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"})
      */
     private $suggestion;
