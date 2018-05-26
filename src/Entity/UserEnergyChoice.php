@@ -67,10 +67,6 @@ class UserEnergyChoice extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userEnergyChoices")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-<<<<<<< HEAD
-     * 
-=======
->>>>>>> Corrections and Optimisations
      * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite"})
      */
     private $user;
