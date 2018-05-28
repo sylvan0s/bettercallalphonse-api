@@ -19,18 +19,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"question_choiceRead"}},
- *      "access_control_message"="Only collab can see all question choices."
+ *      "access_control_message"="Only admins can see all question choices."
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="is_granted('ROLE_ADMIN')",
- *      "access_control_message"="Only admins can post question choices."
+ *      "access_control_message"="Only admins can create question choices."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"question_choiceRead"}}
+ *      "normalization_context"={"groups"={"question_choiceRead"}},
+ *      "access_control_message"="Only admins can see question choices."
  *    }
  *  }
  *)
@@ -46,20 +46,21 @@ class QuestionChoice
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "user_question_choiceRead"})
      */
     private $libelle;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "user_question_choiceRead"})
      */
     private $note;
 
     /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="questionChoices")
-     * @Groups({"question_choiceRead"})
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
+     * @Groups({"question_choiceRead", "question_choiceWrite"})
      */
     private $question;
 

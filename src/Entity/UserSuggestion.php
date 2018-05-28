@@ -2,80 +2,86 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserSuggestionRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_suggestionRead"}},
  *    "denormalization_context"={"groups"={"user_suggestionWrite"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "access_control"="object.getUser() == user",
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestionRead"}},
- *      "access_control_message"="Only collab can see all ideas."
+ *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "access_control_message"="Only admins can see all ideas."
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="object.getUser() == user",
- *      "access_control_message"="Only collab can send an idea."
+ *      "access_control_message"="Only owner can send an idea."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestionRead"}},
+ *      "access_control_message"="Only owner can see an idea.",
  *    }
  *  }
  *)
  */
-class UserSuggestion
+class UserSuggestion extends EntityBase
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_suggestionRead", "user_suggestionWrite", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
+     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
      * @Groups({"user_suggestionRead", "user_suggestionWrite"})
      */
     private $suggestion;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
-     */
-    private $creationDate;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestions")
-     * @Groups({"user_suggestionRead", "user_suggestionWrite", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserSuggestionLike", inversedBy="suggestion")
-     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
+     * @ORM\OneToMany(targetEntity="UserSuggestionLike", mappedBy="suggestion")
+     * @Groups({"user_suggestionRead"})
      */
     private $userSuggestionsLike;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserSuggestionMegaLike", inversedBy="suggestion")
-     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
+     * @ORM\OneToMany(targetEntity="UserSuggestionMegaLike", mappedBy="suggestion")
+     * @Groups({"user_suggestionRead"})
      */
     private $userSuggestionsMegaLike;
 
-    public function getId()
+    public function __construct()
+    {
+        $this->userSuggestionsLike = new ArrayCollection();
+        $this->userSuggestionsMegaLike = new ArrayCollection();
+    }
+
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -92,18 +98,6 @@ class UserSuggestion
         return $this;
     }
 
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(?\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -116,27 +110,66 @@ class UserSuggestion
         return $this;
     }
 
-    public function getUserSuggestionsLike(): ?UserSuggestionLike
+    /**
+     * @return Collection|UserSuggestionLike[]
+     */
+    public function getUserSuggestionsLike(): Collection
     {
         return $this->userSuggestionsLike;
     }
 
-    public function setUserSuggestionsLike(?UserSuggestionLike $userSuggestionsLike): self
+    public function addUserSuggestionsLike(UserSuggestionLike $userSuggestionsLike): self
     {
-        $this->userSuggestionsLike = $userSuggestionsLike;
+        if (!$this->userSuggestionsLike->contains($userSuggestionsLike)) {
+            $this->userSuggestionsLike[] = $userSuggestionsLike;
+            $userSuggestionsLike->setSuggestion($this);
+        }
 
         return $this;
     }
 
-    public function getUserSuggestionsMegaLike(): ?UserSuggestionMegaLike
+    public function removeUserSuggestionsLike(UserSuggestionLike $userSuggestionsLike): self
+    {
+        if ($this->userSuggestionsLike->contains($userSuggestionsLike)) {
+            $this->userSuggestionsLike->removeElement($userSuggestionsLike);
+            // set the owning side to null (unless already changed)
+            if ($userSuggestionsLike->getSuggestion() === $this) {
+                $userSuggestionsLike->setSuggestion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserSuggestionMegaLike[]
+     */
+    public function getUserSuggestionsMegaLike(): Collection
     {
         return $this->userSuggestionsMegaLike;
     }
 
-    public function setUserSuggestionsMegaLike(?UserSuggestionMegaLike $userSuggestionsMegaLike): self
+    public function addUserSuggestionsMegaLike(UserSuggestionMegaLike $userSuggestionsMegaLike): self
     {
-        $this->userSuggestionsMegaLike = $userSuggestionsMegaLike;
+        if (!$this->userSuggestionsMegaLike->contains($userSuggestionsMegaLike)) {
+            $this->userSuggestionsMegaLike[] = $userSuggestionsMegaLike;
+            $userSuggestionsMegaLike->setSuggestion($this);
+        }
 
         return $this;
     }
+
+    public function removeUserSuggestionsMegaLike(UserSuggestionMegaLike $userSuggestionsMegaLike): self
+    {
+        if ($this->userSuggestionsMegaLike->contains($userSuggestionsMegaLike)) {
+            $this->userSuggestionsMegaLike->removeElement($userSuggestionsMegaLike);
+            // set the owning side to null (unless already changed)
+            if ($userSuggestionsMegaLike->getSuggestion() === $this) {
+                $userSuggestionsMegaLike->setSuggestion(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

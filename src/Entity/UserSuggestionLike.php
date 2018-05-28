@@ -8,61 +8,59 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserSuggestionLikeRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_suggestion_likeRead"}},
  *    "denormalization_context"={"groups"={"user_suggestion_likeWrite"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "access_control"="object.getUser() == user",
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestion_likeRead"}},
- *      "access_control_message"="Only collab can see all likes."
+ *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "access_control_message"="Only admins can see all likes."
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="object.getUser() == user",
- *      "access_control_message"="Only collab can add a like."
+ *      "access_control_message"="Only owner can add a like."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestion_likeRead"}},
+ *      "access_control_message"="Only owner can see a like.",
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete a like."
+ *      "access_control_message"="Only owner can delete a like."
  *    }
  *  }
  *)
  */
-class UserSuggestionLike
+class UserSuggestionLike extends EntityBase
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
+     * @Groups({"user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
-     */
-    private $creationDate;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestionsLike")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestion", inversedBy="userSuggestionsLike")
+     * @ORM\JoinColumn(name="suggestion_id", referencedColumnName="id", nullable=false)
      * @Groups({"user_suggestion_likeRead", "user_suggestion_likeWrite"})
      */
     private $suggestion;
@@ -70,18 +68,6 @@ class UserSuggestionLike
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(?\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     public function getUser(): ?User

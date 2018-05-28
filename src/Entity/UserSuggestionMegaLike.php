@@ -8,52 +8,49 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserSuggestionMegaLikeRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_suggestion_mega_likeRead"}},
  *    "denormalization_context"={"groups"={"user_suggestion_mega_likeWrite"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "access_control"="object.getUser() == user",
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestion_mega_likeRead"}},
- *      "access_control_message"="Only collab can see all megalikes."
+ *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "access_control_message"="Only admin can see all megalikes."
  *    },
  *    "post"={
  *      "method"="POST",
  *      "access_control"="object.getUser() == user",
- *      "access_control_message"="Only collab can add a megalike."
+ *      "access_control_message"="Only owner can add a megalike."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestion_mega_likeRead"}},
+ *      "access_control_message"="Only owner can see a mega like.",
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control_message"="Only collab can delete a mega like."
+ *      "access_control_message"="Only owner can delete a mega like."
  *    }
  *  }
  *)
  */
-class UserSuggestionMegaLike
+class UserSuggestionMegaLike extends EntityBase
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"})
+     * @Groups({"user_suggestionRead", "user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"})
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"})
-     */
-    private $creationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestionsMegaLike")
@@ -63,6 +60,7 @@ class UserSuggestionMegaLike
 
     /**
      * @ORM\ManyToOne(targetEntity="UserSuggestion", inversedBy="userSuggestionsMegaLike")
+     * @ORM\JoinColumn(name="suggestion_id", referencedColumnName="id", nullable=false)
      * @Groups({"user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"})
      */
     private $suggestion;
@@ -70,18 +68,6 @@ class UserSuggestionMegaLike
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(?\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     public function getUser(): ?User

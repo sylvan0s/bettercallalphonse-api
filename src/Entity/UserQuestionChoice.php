@@ -8,39 +8,41 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserQuestionChoiceRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_question_choiceRead"}},
  *    "denormalization_context"={"groups"={"user_question_choiceWrite"}},
- *    "access_control"="is_granted('ROLE_ADMIN')",
+ *    "access_control"="object.getUser() == user",
  *    "order"={"user.username": "ASC", "creationDate": "ASC"}
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_question_choiceRead"}},
- *      "access_control_message"="Only collab can see all user question choices."
+ *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "access_control_message"="Only admins can see all user question choices."
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="object.getUser() == user",
- *      "access_control_message"="Only collab can post an user question choice."
+ *      "access_control_message"="Only owner can post an user question choice."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_question_choiceRead"}},
+ *      "access_control_message"="Only owner can see an user question choice.",
  *    },
  *    "put"={
  *      "method"="PUT",
- *      "access_control_message"="Only collab can modify an user question choice."
+ *      "access_control_message"="Only owner can modify an user question choice."
  *    }
  *  }
  *)
  */
-class UserQuestionChoice
+class UserQuestionChoice extends EntityBase
 {
     /**
      * @ORM\Id()
@@ -51,25 +53,22 @@ class UserQuestionChoice
     private $id;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
-     */
-    private $creationDate;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userQuestionChoices")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="QuestionChoice", inversedBy="userQuestionChoices")
+     * @ORM\JoinColumn(name="question_choice_id", referencedColumnName="id", nullable=false)
      * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $questionChoice;
 
     /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="userQuestionChoices")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
      * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $question;
@@ -77,18 +76,6 @@ class UserQuestionChoice
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(?\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     public function getUser(): ?User
