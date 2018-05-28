@@ -56,7 +56,7 @@ class UserEnergyChoice extends EntityBase
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\Range(
      *     min = 0,
-     *     max = 10,
+     *     max = 5,
      *     minMessage = "You must enter at least {{ limit }}",
      *     maxMessage = "You can not have a higher value {{ limit }}"
      * )

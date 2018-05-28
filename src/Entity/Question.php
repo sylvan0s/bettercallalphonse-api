@@ -20,18 +20,23 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"questionRead"}},
- *      "access_control_message"="Only admins can see all questions."
+ *      "access_control_message"="Only collab can see all questions."
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control_message"="Only admins can create questions."
+ *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "access_control_message"="Only admins can post questions."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"questionRead"}},
- *      "access_control_message"="Only admins can see a question."
+ *      "access_control"="is_granted('ROLE_ADMIN')"
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control_message"="Only admins can delete a question."
  *    }
  *  }
  *)
@@ -47,13 +52,13 @@ class Question
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"questionRead", "questionWrite", "question_choiceRead", "user_question_choiceRead"})
      */
     private $libelle;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"questionRead", "questionWrite", "question_choiceRead", "user_question_choiceRead"})
      */
     private $noteMax;
