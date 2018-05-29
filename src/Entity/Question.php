@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
  *      "access_control_message"="Only admins can post questions."
  *    }
  *  },
@@ -34,8 +34,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "normalization_context"={"groups"={"questionRead"}},
  *      "access_control"="is_granted('ROLE_ADMIN')"
  *    },
+ *    "put"={
+ *      "method"="PUT",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control_message"="Only admins can modify a question."
+ *    },
  *    "delete"={
  *      "method"="DELETE",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
  *      "access_control_message"="Only admins can delete a question."
  *    }
  *  }
