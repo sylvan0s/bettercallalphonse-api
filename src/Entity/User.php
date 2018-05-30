@@ -50,17 +50,17 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @Groups({"userRead", "user_suggestionRead", "user_question_choiceRead"})
+     * @Groups({"userRead", "userWrite", "user_suggestionRead", "user_question_choiceRead"})
      */
     protected $username;
 
     /**
-     * @Groups({"userRead"})
+     * @Groups({"userRead", "userWrite"})
      */
     protected $email;
 
     /**
-     * @Groups({"userRead"})
+     * @Groups({"userRead", "userWrite"})
      */
     protected $roles;
 
@@ -122,6 +122,11 @@ class User extends BaseUser
      * @Groups({"userRead"})
      */
     private $userSuggestionsMegaLike;
+
+    /**
+     * @Groups({"userWrite"})
+     */
+    protected $plainPassword;
 
     public function __construct()
     {
