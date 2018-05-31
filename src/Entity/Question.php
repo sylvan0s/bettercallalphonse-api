@@ -58,13 +58,13 @@ class Question
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @Groups({"questionRead", "questionWrite", "question_choiceRead", "user_question_choiceRead"})
      */
     private $libelle;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      * @Groups({"questionRead", "questionWrite", "question_choiceRead", "user_question_choiceRead"})
      */
     private $noteMax;

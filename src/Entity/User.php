@@ -27,6 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
  *      "access_control_message"="Only admins can create users."
  *    }
  *  },
@@ -35,6 +36,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"userRead"}},
  *      "access_control_message"="Only admins can see user."
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control_message"="Only admins can delete a user."
  *    }
  *  }
  *)
@@ -50,24 +56,34 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @Groups({"userRead", "user_suggestionRead", "user_question_choiceRead"})
+     * @Groups({"userRead", "userWrite", "user_suggestionRead", "user_question_choiceRead"})
      */
     protected $username;
 
     /**
-     * @Groups({"userRead"})
+     * @Groups({"userRead", "userWrite"})
      */
     protected $email;
 
     /**
-     * @Groups({"userRead"})
+     * @Groups({"userRead", "userWrite"})
      */
     protected $roles;
 
     /**
-     * @Groups({"userRead"})
+     * @Groups({"userRead", "userWrite"})
      */
     protected $lastLogin;
+
+    /**
+     * @Groups({"userWrite"})
+     */
+    protected $plainPassword;
+
+    /**
+     * @Groups({"userWrite"})
+     */
+    protected $enabled;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

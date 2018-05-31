@@ -23,6 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
  *      "access_control_message"="Only admins can create question choices."
  *    }
  *  },
@@ -31,6 +32,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"question_choiceRead"}},
  *      "access_control_message"="Only admins can see question choices."
+ *    },
+ *    "put"={
+ *      "method"="PUT",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control_message"="Only admins can modify a question choice."
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control_message"="Only admins can delete a question choice."
  *    }
  *  }
  *)
