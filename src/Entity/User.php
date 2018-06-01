@@ -86,7 +86,7 @@ class User extends BaseUser
     protected $plainPassword;
 
     /**
-     * @Groups({"userWrite"})
+     * @Groups({"userRead", "userWrite"})
      */
     protected $enabled;
 

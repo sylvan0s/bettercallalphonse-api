@@ -38,6 +38,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "put"={
  *      "method"="PUT",
  *      "access_control_message"="Only owner can modify an user question choice."
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control_message"="Only admins can delete an user question choice."
  *    }
  *  }
  *)
@@ -48,7 +53,7 @@ class UserQuestionChoice extends EntityBase
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"questionRead", "user_question_choiceRead", "user_question_choiceWrite"})
+     * @Groups({"questionRead", "user_question_choiceRead", "user_question_choiceWrite", "userRead"})
      */
     private $id;
 

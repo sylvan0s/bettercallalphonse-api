@@ -36,6 +36,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestionRead"}},
  *      "access_control_message"="Only owner can see an idea.",
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control_message"="Only admins can delete an idea."
  *    }
  *  }
  *)
@@ -46,7 +51,7 @@ class UserSuggestion extends EntityBase
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
+     * @Groups({"user_suggestionRead", "user_suggestionWrite", "userRead"})
      */
     private $id;
 

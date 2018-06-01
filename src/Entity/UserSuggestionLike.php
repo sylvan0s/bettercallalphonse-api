@@ -47,7 +47,7 @@ class UserSuggestionLike extends EntityBase
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_likeWrite"})
+     * @Groups({"user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_likeWrite", "userRead"})
      */
     private $id;
 

@@ -38,6 +38,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "put"={
  *      "method"="PUT",
  *      "access_control_message"="Only owner can modify an user energy choice.",
+ *    },
+ *    "delete"={
+ *      "method"="DELETE",
+ *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control_message"="Only admins can delete an user energy choice."
  *    }
  *  }
  *)
@@ -48,7 +53,7 @@ class UserEnergyChoice extends EntityBase
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite"})
+     * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite", "userRead"})
      */
     private $id;
 
