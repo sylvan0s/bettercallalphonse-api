@@ -50,7 +50,7 @@ class UserSuggestion extends EntityBase
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user_suggestionRead", "user_suggestionWrite", "userRead"})
+     * @Groups({"user_suggestionRead", "user_suggestionWrite", "userRead", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
      */
     private $id;
 
@@ -63,7 +63,7 @@ class UserSuggestion extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSuggestions")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"user_suggestionRead", "user_suggestionWrite"})
+     * @Groups({"user_suggestionRead", "user_suggestionWrite", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
      */
     private $user;
 
