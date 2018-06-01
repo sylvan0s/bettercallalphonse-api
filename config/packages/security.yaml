@@ -3,10 +3,10 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        # ROLE_COLLAB:  ROLE_USER
-        # ROLE_SIEGE:   ROLE_ADMIN
-        ROLE_READER:  ROLE_USER
-        ROLE_ADMIN:   ROLE_READER
+        # ROLE_READER:  ROLE_USER
+        # ROLE_ADMIN:   ROLE_READER
+        ROLE_COLLAB:  ROLE_USER
+        ROLE_ADMIN:   ROLE_COLLAB
 
     providers:
         fos_userbundle:
@@ -48,4 +48,4 @@ security:
         - { path: ^/user/register, role: ROLE_ADMIN }
         - { path: ^/resetting, role: ROLE_ADMIN }
         - { path: ^/api/token/refresh, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, role: ROLE_ADMIN }
+        - { path: ^/api, role: [ROLE_COLLAB, ROLE_ADMIN] }

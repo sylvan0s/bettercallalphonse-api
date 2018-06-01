@@ -13,8 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "normalization_context"={"groups"={"questionRead"}},
- *    "denormalization_context"={"groups"={"questionWrite"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "denormalization_context"={"groups"={"questionWrite"}}
  *  },
  *  collectionOperations={
  *    "get"={
@@ -24,24 +23,24 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can post questions."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "normalization_context"={"groups"={"questionRead"}},
- *      "access_control"="is_granted('ROLE_ADMIN')"
+ *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "normalization_context"={"groups"={"questionRead"}}
  *    },
  *    "put"={
  *      "method"="PUT",
- *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can modify a question."
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can delete a question."
  *    }
  *  }

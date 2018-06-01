@@ -13,26 +13,30 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_suggestion_likeRead"}},
- *    "denormalization_context"={"groups"={"user_suggestion_likeWrite"}},
- *    "access_control"="object.getUser() == user",
+ *    "denormalization_context"={"groups"={"user_suggestion_likeWrite"}}
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestion_likeRead"}},
- *      "access_control"="is_granted('ROLE_ADMIN')",
- *      "access_control_message"="Only admins can see all likes."
+ *      "access_control_message"="Only owner can see all likes."
  *    },
  *    "post"={
  *      "method"="POST",
+ *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owner can add a like."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
+ *      "access_control"="object.getUser() == user",
  *      "normalization_context"={"groups"={"user_suggestion_likeRead"}},
  *      "access_control_message"="Only owner can see a like.",
+ *    },
+ *    "put"={
+ *      "method"="PUT",
+ *      "access_control_message"="Only owner can modify a like."
  *    },
  *    "delete"={
  *      "method"="DELETE",

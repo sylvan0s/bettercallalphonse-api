@@ -13,15 +13,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"user_suggestion_mega_likeRead"}},
- *    "denormalization_context"={"groups"={"user_suggestion_mega_likeWrite"}},
- *    "access_control"="object.getUser() == user",
+ *    "denormalization_context"={"groups"={"user_suggestion_mega_likeWrite"}}
  *  },
  *  collectionOperations={
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_suggestion_mega_likeRead"}},
- *      "access_control"="is_granted('ROLE_ADMIN')",
- *      "access_control_message"="Only admin can see all megalikes."
+ *      "access_control_message"="Only owner can see all megalikes."
  *    },
  *    "post"={
  *      "method"="POST",
@@ -32,8 +30,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
+ *      "access_control"="object.getUser() == user",
  *      "normalization_context"={"groups"={"user_suggestion_mega_likeRead"}},
  *      "access_control_message"="Only owner can see a mega like.",
+ *    },
+ *    "put"={
+ *      "method"="PUT",
+ *      "access_control_message"="Only owner can modify a mega like."
  *    },
  *    "delete"={
  *      "method"="DELETE",

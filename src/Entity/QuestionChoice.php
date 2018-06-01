@@ -12,8 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"question_choiceRead"}},
- *    "denormalization_context"={"groups"={"question_choiceWrite"}},
- *    "access_control"="is_granted('ROLE_ADMIN')"
+ *    "denormalization_context"={"groups"={"question_choiceWrite"}}
  *  },
  *  collectionOperations={
  *    "get"={
@@ -23,24 +22,25 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
- *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can create question choices."
  *    }
  *  },
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "normalization_context"={"groups"={"question_choiceRead"}},
  *      "access_control_message"="Only admins can see question choices."
  *    },
  *    "put"={
  *      "method"="PUT",
- *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can modify a question choice."
  *    },
  *    "delete"={
  *      "method"="DELETE",
- *      "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can delete a question choice."
  *    }
  *  }
