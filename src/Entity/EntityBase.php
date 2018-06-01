@@ -15,22 +15,22 @@ abstract class EntityBase
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
-     * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite",
-     *          "user_question_choiceRead", "user_question_choiceWrite",
-     *          "user_suggestionRead", "user_suggestionWrite",
-     *          "user_suggestion_likeRead", "user_suggestion_likeWrite",
-     *          "user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"
+     * @Groups({"user_energy_choiceRead",
+     *          "user_question_choiceRead",
+     *          "user_suggestionRead",
+     *          "user_suggestion_likeRead",
+     *          "user_suggestion_mega_likeRead"
      *          })
      */
     protected $creationDate;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
-     * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite",
-     *          "user_question_choiceRead", "user_question_choiceWrite",
-     *          "user_suggestionRead", "user_suggestionWrite",
-     *          "user_suggestion_likeRead", "user_suggestion_likeWrite",
-     *          "user_suggestion_mega_likeRead", "user_suggestion_mega_likeWrite"
+     * @Groups({"user_energy_choiceRead",
+     *          "user_question_choiceRead",
+     *          "user_suggestionRead",
+     *          "user_suggestion_likeRead",
+     *          "user_suggestion_mega_likeRead"
      *          })
      */
     protected $updateDate;
