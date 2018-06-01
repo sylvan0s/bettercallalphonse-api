@@ -26,6 +26,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
+ *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owner can send an idea."
  *    }
  *  },
