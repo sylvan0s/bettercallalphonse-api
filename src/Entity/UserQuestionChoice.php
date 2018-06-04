@@ -24,6 +24,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "post"={
  *      "method"="POST",
+ *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owner can post an user question choice."
  *    }
  *  },
@@ -36,6 +37,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "put"={
  *      "method"="PUT",
+ *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owners can modify an user question choice."
  *    },
  *    "delete"={

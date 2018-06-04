@@ -36,10 +36,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "put"={
  *      "method"="PUT",
+ *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owner can modify a like."
  *    },
  *    "delete"={
  *      "method"="DELETE",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only owner can delete a like."
  *    }
  *  }
