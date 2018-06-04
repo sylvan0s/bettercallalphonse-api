@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *    "force_eager"=false,
  *    "normalization_context"={"groups"={"question_choiceRead"}},
- *    "denormalization_context"={"groups"={"question_choiceWrite"}}
+ *    "denormalization_context"={"groups"={"question_choiceWrite"}},
+ *    "order"={"note": "ASC"}
  *  },
  *  collectionOperations={
  *    "get"={
