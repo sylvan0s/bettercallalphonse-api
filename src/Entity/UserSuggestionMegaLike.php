@@ -41,6 +41,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "delete"={
  *      "method"="DELETE",
+ *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owner can delete a mega like."
  *    }
  *  }
