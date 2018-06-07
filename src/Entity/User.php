@@ -153,6 +153,10 @@ class User extends BaseUser
         $this->userSuggestionsLike = new ArrayCollection();
         $this->userSuggestionsMegaLike = new ArrayCollection();
         // your own logic
+
+        $this->addRole('ROLE_COLLAB');
+        $this->setEnabled(true);
+        $this->setConfirmationToken(null);
     }
 
     public function getFirstname(): ?string
