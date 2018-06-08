@@ -91,7 +91,7 @@ api_platform:
 
         pagination:
             # To enable or disable pagination for all resource collections by default.
-            enabled: true
+            enabled: false
 
             # To allow the client to enable or disable the pagination.
             client_enabled: false
@@ -100,10 +100,10 @@ api_platform:
             client_items_per_page: false
 
             # The default number of items per page.
-            items_per_page: 1000000
+            items_per_page: 30
 
             # The maximum number of items per page.
-            maximum_items_per_page: 1000000 # ~
+            maximum_items_per_page: 30 # ~
 
             # The default name of the parameter handling the page number.
             page_parameter_name: 'page'
