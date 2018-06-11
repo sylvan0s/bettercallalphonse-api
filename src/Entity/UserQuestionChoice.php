@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_question_choiceRead"}},
- *      "access_control_message"="Only owner can see all user question choices."
+ *      "access_control_message"="Only admns can see all user question choices."
  *    },
  *    "post"={
  *      "method"="POST",
