@@ -149,12 +149,6 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
-    "sendinblue/api-bundle": {
-        "version": "1.4.0"
-    },
-    "sendinblue/api-v3-sdk": {
-        "version": "v5.0.1"
-    },
     "sensio/framework-extra-bundle": {
         "version": "4.0",
         "recipe": {
@@ -271,6 +265,9 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
+    },
+    "symfony/polyfill-ctype": {
+        "version": "v1.8.0"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.7.0"
