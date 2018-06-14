@@ -33,7 +33,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={
  *    "get"={
  *      "method"="GET",
- *      "access_control"="object.getUser() == user",
  *      "normalization_context"={"groups"={"user_suggestionRead"}},
  *      "access_control_message"="Only owner can see an idea.",
  *    },

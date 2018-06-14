@@ -15,7 +15,6 @@ class EmailController extends Controller
     public function index(Request $request, \Swift_Mailer $mailer)
     {
       $datas = json_decode($request->getContent());
-      // var_dump($datas); die;
 
       $register_email = (new \Swift_Message('Bienvenue sur Better Call Altimate !'))
                         ->setFrom('jlgd@altimate.pro')
@@ -34,8 +33,5 @@ class EmailController extends Controller
       $mailer->send($register_email);
 
       return new Response('Email envoyé', Response::HTTP_OK, array('content-type', 'application/json'));
-      // return $this->render('email/index.html.twig', [
-      //     'controller_name' => 'EmailController',
-      // ]);
     }
 }
