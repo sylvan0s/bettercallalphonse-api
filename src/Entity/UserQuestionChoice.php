@@ -61,7 +61,7 @@ class UserQuestionChoice extends EntityBase
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"questionRead", "collab_user_question_choiceRead", "user_question_choiceRead",
+     * @Groups({"questionRead", "user_question_choiceRead",
      *     "user_question_choiceWrite", "userRead"})
      */
     private $id;
@@ -69,7 +69,7 @@ class UserQuestionChoice extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userQuestionChoices")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"collab_user_question_choiceRead", "user_question_choiceRead", "user_question_choiceWrite"})
+     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $user;
 
