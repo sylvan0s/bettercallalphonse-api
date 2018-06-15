@@ -55,7 +55,7 @@ class User extends BaseUser
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"userRead", "user_question_choiceRead", "user_energy_choiceRead",
+     * @Groups({"userRead", "collab_user_question_choiceRead", "user_question_choiceRead", "user_energy_choiceRead",
      *     "user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
      */
     protected $id;

@@ -55,14 +55,6 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
           $queryBuilder->andWhere(sprintf('%s.id = :current_user', $rootAlias));
           $queryBuilder->setParameter('current_user', $user->getId());
         }
-
-        if ($user instanceof User
-            && (UserQuestionChoice::class === $resourceClass)
-            && !$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            $rootAlias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->andWhere(sprintf('%s.user != :current_user', $rootAlias));
-            $queryBuilder->setParameter('current_user', $user->getId());
-        }
         /* if ($user instanceof User
             && (UserQuestionChoice::class === $resourceClass )
             && !$this->authorizationChecker->isGranted('ROLE_ADMIN')) {

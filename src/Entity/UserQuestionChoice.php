@@ -69,7 +69,7 @@ class UserQuestionChoice extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userQuestionChoices")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
+     * @Groups({"collab_user_question_choiceRead", "user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $user;
 
@@ -83,7 +83,7 @@ class UserQuestionChoice extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="userQuestionChoices")
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
-     * @Groups({"collab_user_question_choiceRead", "user_question_choiceRead", "user_question_choiceWrite"})
+     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $question;
 
