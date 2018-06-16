@@ -53,8 +53,8 @@ class QuestionChoice
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "collab_user_question_choiceRead",
-     *     "user_question_choiceRead"})
+     * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "my_user_question_choiceRead",
+     *     "collabs_user_question_choiceRead", "user_question_choiceRead"})
      */
     private $id;
 
