@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"userRead"}},
+ *    "normalization_context"={"groups"={"userRead", "user_reset_passwordRead"}},
  *    "denormalization_context"={"groups"={"userWrite"}}
  *  },
  *  collectionOperations={
@@ -28,6 +28,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="POST",
  *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can create users."
+ *    },
+ *    "reset_password"={
+ *      "method"="POST",
+ *      "path"="users/reset_password",
+ *      "normalization_context"={"groups"={"user_reset_passwordRead"}},
+ *      "access_control"="object.getUser() == user",
+ *      "access_control_message"="Only owner can change user password."
  *    }
  *  },
  *  itemOperations={
@@ -56,7 +63,7 @@ class User extends BaseUser
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups({"userRead", "user_question_choiceRead", "user_energy_choiceRead",
-     *     "user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_mega_likeRead", "collabs_user_question_choiceRead"})
+     *     "user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
      */
     protected $id;
 

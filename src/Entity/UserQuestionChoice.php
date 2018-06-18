@@ -28,13 +28,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "path"="my/user_question_choices.{_format}",
  *      "normalization_context"={"groups"={"my_user_question_choiceRead"}},
- *      "access_control_message"="Only admns can see all user question choices."
+ *      "access_control_message"="Only admins can see all user question choices."
  *    },
  *    "collabs"={
  *      "method"="GET",
  *      "path"="collabs/user_question_choices.{_format}",
  *      "normalization_context"={"groups"={"collabs_user_question_choiceRead"}},
- *      "access_control_message"="Only admns can see all user question choices."
+ *      "access_control_message"="Only admins can see all user question choices."
  *    },
  *    "post"={
  *      "method"="POST",
