@@ -19,7 +19,9 @@ abstract class EntityBase
      *          "user_question_choiceRead",
      *          "user_suggestionRead",
      *          "user_suggestion_likeRead",
-     *          "user_suggestion_mega_likeRead"
+     *          "user_suggestion_mega_likeRead",
+     *          "my_user_question_choiceRead",
+     *          "collabs_user_question_choiceRead"
      *          })
      */
     protected $creationDate;
@@ -30,7 +32,9 @@ abstract class EntityBase
      *          "user_question_choiceRead",
      *          "user_suggestionRead",
      *          "user_suggestion_likeRead",
-     *          "user_suggestion_mega_likeRead"
+     *          "user_suggestion_mega_likeRead",
+     *          "my_user_question_choiceRead",
+     *          "collabs_user_question_choiceRead"
      *          })
      */
     protected $updateDate;
