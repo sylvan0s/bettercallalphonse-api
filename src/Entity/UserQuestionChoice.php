@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"user_question_choiceRead", "collab_user_question_choiceRead"}},
+ *    "normalization_context"={"groups"={"user_question_choiceRead", "my_user_question_choiceRead",
+ *     "collabs_user_question_choiceRead"}},
  *    "denormalization_context"={"groups"={"user_question_choiceWrite"}},
  *    "order"={"user.username": "ASC", "creationDate": "ASC"}
  *  },
@@ -23,10 +24,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "normalization_context"={"groups"={"user_question_choiceRead"}},
  *      "access_control_message"="Only admns can see all user question choices."
  *    },
- *    "collab_get"={
+ *    "my"={
  *      "method"="GET",
- *      "path"="collab/user_question_choices.{_format}",
- *      "normalization_context"={"groups"={"collab_user_question_choiceRead"}},
+ *      "path"="my/user_question_choices.{_format}",
+ *      "normalization_context"={"groups"={"my_user_question_choiceRead"}},
+ *      "access_control_message"="Only admns can see all user question choices."
+ *    },
+ *    "collabs"={
+ *      "method"="GET",
+ *      "path"="collabs/user_question_choices.{_format}",
+ *      "normalization_context"={"groups"={"collabs_user_question_choiceRead"}},
  *      "access_control_message"="Only admns can see all user question choices."
  *    },
  *    "post"={
@@ -69,14 +76,15 @@ class UserQuestionChoice extends EntityBase
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userQuestionChoices")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"collab_user_question_choiceRead", "user_question_choiceRead", "user_question_choiceWrite"})
+     * @Groups({"user_question_choiceRead", "user_question_choiceWrite"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="QuestionChoice", inversedBy="userQuestionChoices")
      * @ORM\JoinColumn(name="question_choice_id", referencedColumnName="id", nullable=false)
-     * @Groups({"collab_user_question_choiceRead", "user_question_choiceRead", "user_question_choiceWrite"})
+     * @Groups({"my_user_question_choiceRead", "collabs_user_question_choiceRead", "user_question_choiceRead",
+     *     "user_question_choiceWrite"})
      */
     private $questionChoice;
 
