@@ -68,10 +68,9 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
         {
             if(in_array($parameters['_route'], [self::COLLABS_RESET_PASSWORD_BY_TOKEN_ITEM])) {
                 $request = $this->requestStack->getCurrentRequest();
-                $patch = $request->get('token');
                 $rootAlias = $queryBuilder->getRootAliases()[0];
                 $queryBuilder->andWhere(sprintf('%s.confirmationToken = :current_token', $rootAlias));
-                $queryBuilder->setParameter('current_token', $patch);
+                $queryBuilder->setParameter('current_token', $request->get('token'));
             }
         } else {
 
