@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"userRead", "user_reset_passwordRead"}},
+ *    "normalization_context"={"groups"={"userRead", "user_reset_passwordRead", "user_change_passwordWrite"}},
  *    "denormalization_context"={"groups"={"userWrite"}}
  *  },
  *  collectionOperations={
@@ -28,13 +28,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="POST",
  *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can create users."
- *    },
- *    "reset_password"={
- *      "method"="POST",
- *      "path"="users/reset_password",
- *      "normalization_context"={"groups"={"user_reset_passwordRead"}},
- *      "access_control"="object.getUser() == user",
- *      "access_control_message"="Only owner can change user password."
  *    }
  *  },
  *  itemOperations={
@@ -47,6 +40,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="PUT",
  *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can modify a user."
+ *    },
+ *    "reset_password_by_token"={
+ *      "method"="PUT",
+ *      "path"="users/changepassword.{_format}",
+ *      "normalization_context"={"groups"={"user_change_passwordWrite"}},
+ *      "access_control"="object.getConfirmationToken() == token",
+ *      "access_control_message"="Only owner can modify his password."
  *    },
  *    "delete"={
  *      "method"="DELETE",
@@ -88,7 +88,7 @@ class User extends BaseUser
     protected $lastLogin;
 
     /**
-     * @Groups({"userWrite"})
+     * @Groups({"userWrite", "user_change_passwordWrite"})
      */
     protected $plainPassword;
 
