@@ -42,10 +42,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "access_control_message"="Only admins can modify a user."
  *    },
  *    "reset_password_by_token"={
- *      "method"="PUT",
- *      "path"="users/changepassword.{_format}",
+ *      "method"="PATCH",
+ *      "path"="collabs/changepassword/{id}/{token}.{_format}",
  *      "normalization_context"={"groups"={"user_change_passwordWrite"}},
- *      "access_control"="object.getConfirmationToken() == token",
  *      "access_control_message"="Only owner can modify his password."
  *    },
  *    "delete"={
