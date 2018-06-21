@@ -41,13 +41,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can modify a user."
  *    },
- *    "reset_password_by_token"={
- *      "method"="PUT",
- *      "path"="users/changepassword.{_format}",
- *      "normalization_context"={"groups"={"user_change_passwordWrite"}},
- *      "access_control"="object.getConfirmationToken() == token",
- *      "access_control_message"="Only owner can modify his password."
- *    },
  *    "delete"={
  *      "method"="DELETE",
  *      "access_control"="is_granted('ROLE_ADMIN')",
