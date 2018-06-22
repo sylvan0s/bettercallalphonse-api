@@ -19,6 +19,7 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
 {
     const MY_QUESTION_CHOICES_GET_COLLECTION = "api_user_question_choices_my_collection";
     const COLLABS_QUESTION_CHOICES_GET_COLLECTION = "api_user_question_choices_collabs_collection";
+    const ALL_USERS_GET_COLLECTION = "api_users_all_collection";
 
     private $tokenStorage;
     private $authorizationChecker;
@@ -63,10 +64,13 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
 
         if ($user instanceof User
             && (User::class === $resourceClass)
-            && !$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            $rootAlias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->andWhere(sprintf('%s.id = :current_user', $rootAlias));
-            $queryBuilder->setParameter('current_user', $user->getId());
+            && !$this->authorizationChecker->isGranted('ROLE_ADMIN')
+          ) {
+            if ($parameters['_route'] !== self::ALL_USERS_GET_COLLECTION) {
+              $rootAlias = $queryBuilder->getRootAliases()[0];
+              $queryBuilder->andWhere(sprintf('%s.id = :current_user', $rootAlias));
+              $queryBuilder->setParameter('current_user', $user->getId());
+            }
         }
 
         if ($user instanceof User

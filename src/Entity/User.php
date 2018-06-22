@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"userRead", "user_reset_passwordRead", "user_change_passwordWrite"}},
+ *    "normalization_context"={"groups"={"userRead", "user_reset_passwordRead", "user_change_passwordWrite", "all_usersRead"}},
  *    "denormalization_context"={"groups"={"userWrite"}}
  *  },
  *  collectionOperations={
@@ -23,6 +23,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"userRead"}},
  *      "access_control_message"="Only admins can see all users."
+ *    },
+ *    "all"={
+ *      "method"="GET",
+ *      "path"="all/users.{_format}",
+ *      "normalization_context"={"groups"={"all_usersRead"}},
+ *      "access_control_message"="Only admins can create users."
  *    },
  *    "post"={
  *      "method"="POST",
@@ -56,7 +62,7 @@ class User extends BaseUser
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups({"userRead", "user_question_choiceRead", "user_energy_choiceRead",
-     *     "user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_mega_likeRead"})
+     *     "user_suggestionRead", "user_suggestion_likeRead", "user_suggestion_mega_likeRead", "all_usersRead"})
      */
     protected $id;
 
