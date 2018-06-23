@@ -75,7 +75,15 @@ class ResettingController
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
-            return $form;
+            foreach ($form->getErrors(true, true) as $key => $error)
+            {
+                $error = $error->getMessage() . "\n";
+            }
+            return new JsonResponse(
+                // no translation provided for this in \FOS\UserBundle\Controller\ResettingController
+                sprintf('"%s"', $error),
+                JsonResponse::HTTP_BAD_REQUEST
+            );
         }
 
         $event = new FormEvent($form, $request);
