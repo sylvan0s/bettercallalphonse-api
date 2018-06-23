@@ -35,3 +35,6 @@ services:
         #arguments: [ @router ]
         tags:
             - { name: kernel.event_subscriber }
+    reset_password_service:
+        alias: fos_user.resetting.form.factory
+        public: true
