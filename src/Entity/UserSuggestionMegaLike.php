@@ -8,6 +8,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserSuggestionMegaLikeRepository")
+ * @ORM\Table(
+ *     uniqueConstraints= {
+ *      @ORM\UniqueConstraint(name="user_suggestion_unique", columns={"user_id", "suggestion_id"})
+ *     }
+ * )
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  attributes={
