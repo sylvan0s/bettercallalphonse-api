@@ -37,6 +37,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "user_reset_password"={
  *      "route_name"="user_reset_password"
+ *     },
+ *     "user_change_password"={
+ *      "route_name"="user_change_password"
  *     }
  *  },
  *  itemOperations={
