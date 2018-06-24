@@ -89,7 +89,7 @@ class ChangePasswordController
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('change_password_service');
         $form = $formFactory->createForm([
-            'csrf_protection'    => false
+            'csrf_protection'    => false,
         ]);
 
         $form->setData($user);

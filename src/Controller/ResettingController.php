@@ -68,7 +68,6 @@ class ResettingController
         $formFactory = $this->container->get('reset_password_service');
         $form = $formFactory->createForm([
             'csrf_protection'    => false,
-            'allow_extra_fields' => true,
         ]);
 
         $form->setData($user);
