@@ -13,6 +13,9 @@ security:
             id: fos_user.user_provider.username
 
     firewalls:
+        resetpassword:
+            pattern: ^/api/user/resetting/reset
+            security: false
         refresh:
             pattern: ^/api/token/refresh
             stateless: true
@@ -47,5 +50,6 @@ security:
         - { path: ^/user/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/register, role: ROLE_ADMIN }
         - { path: ^/resetting, role: ROLE_ADMIN }
+        - { path: ^/api/user/resetting/reset, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/token/refresh, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, role: [ROLE_COLLAB, ROLE_ADMIN] }

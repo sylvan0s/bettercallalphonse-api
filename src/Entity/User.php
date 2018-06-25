@@ -34,7 +34,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="POST",
  *      "access_control"="is_granted('ROLE_ADMIN')",
  *      "access_control_message"="Only admins can create users."
- *    }
+ *    },
+ *    "user_reset_password"={
+ *      "route_name"="user_reset_password"
+ *     },
+ *     "user_change_password"={
+ *      "route_name"="user_change_password"
+ *     }
  *  },
  *  itemOperations={
  *    "get"={
