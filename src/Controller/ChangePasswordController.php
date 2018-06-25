@@ -90,6 +90,7 @@ class ChangePasswordController
         $formFactory = $this->container->get('change_password_service');
         $form = $formFactory->createForm([
             'csrf_protection'    => false,
+            'allow_extra_fields' => true,
         ]);
 
         $form->setData($user);

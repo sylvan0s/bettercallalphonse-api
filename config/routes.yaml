@@ -2,6 +2,15 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-    prefix: /user
+# fos_user:
+#     # resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+#     # prefix: /user
+#     path: "/user/login_check"
+#     controller: "fos_user.security.controller:checkAction"
+fos_user_login_check:
+    path: /user/login_check
+    controller: "fos_user.security.controller:checkAction"
+
+fos_user_send_email:
+    path: /user/resetting/send-email
+    controller: "fos_user.resetting.controller:sendEmailAction"
