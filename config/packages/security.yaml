@@ -14,7 +14,7 @@ security:
 
     firewalls:
         resetpassword:
-            pattern: ^/api/user/resetting/reset
+            pattern: ^/api/user/resetting
             security: false
         refresh:
             pattern: ^/api/token/refresh

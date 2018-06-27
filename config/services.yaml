@@ -30,14 +30,18 @@ services:
         tags:
             - { name: api_platform.doctrine.orm.query_extension.collection, priority: 9 }
             - { name: api_platform.doctrine.orm.query_extension.item }
-    App\EventListener\PasswordResettingListener:
-        #class: App\UserBundle\EventListener\PasswordResettingListener
-        #arguments: [ @router ]
-        tags:
-            - { name: kernel.event_subscriber }
+
     reset_password_service:
         alias: fos_user.resetting.form.factory
         public: true
+
     change_password_service:
         alias: fos_user.change_password.form.factory
         public: true
+
+    user.mailer.rest:
+        class: App\Mailer\Rest
+        autowire: false
+        autoconfigure: false
+        public: true
+        parent: fos_user.mailer.twig_swift
