@@ -51,5 +51,6 @@ security:
         - { path: ^/user/register, role: ROLE_ADMIN }
         - { path: ^/resetting, role: ROLE_ADMIN }
         - { path: ^/api/user/resetting/reset, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/user/resetting/request, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/token/refresh, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, role: [ROLE_COLLAB, ROLE_ADMIN] }

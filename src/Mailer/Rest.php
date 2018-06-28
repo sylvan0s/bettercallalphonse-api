@@ -50,7 +50,7 @@ class Rest implements MailerInterface
     public function sendResettingEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['template']['resetting'];
-        
+
         $url = $_SERVER['URL_APP'].$user->getConfirmationToken();
 
         $context = [
