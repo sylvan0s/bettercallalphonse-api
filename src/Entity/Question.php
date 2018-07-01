@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  attributes={
  *    "normalization_context"={"groups"={"questionRead"}},
@@ -53,7 +54,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  }
  *)
  */
-class Question
+class Question extends EntityBase
 {
     /**
      * @ORM\Id()
@@ -83,8 +84,15 @@ class Question
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
+     * @Groups({"questionWrite"})
      */
     private $enabled;
+
+    /**
+     * @ORM\Column(type="integer", options={"default":1})
+     * @Groups({"questionWrite"})
+     */
+    private $ordered;
 
     public function __construct()
     {
@@ -159,6 +167,18 @@ class Question
     public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getOrdered(): ?int
+    {
+        return $this->ordered;
+    }
+
+    public function setOrdered(int $ordered): self
+    {
+        $this->ordered = $ordered;
 
         return $this;
     }

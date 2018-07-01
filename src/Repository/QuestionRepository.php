@@ -47,4 +47,20 @@ class QuestionRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findOtherElements($elements)
+    {
+        return $this->createQueryBuilder('q')
+                ->andWhere('q.enabled = :enabled')
+                ->andWhere('q.id != :id')
+                ->andWhere('q.ordered >= :ordered')
+                ->orderBy('q.ordered', 'ASC')
+                ->orderBy('q.updateDate', 'DESC')
+                ->setParameter('enabled', $elements['enabled'])
+                ->setParameter('ordered', $elements['ordered'])
+                ->setParameter('id', $elements['id'])
+                ->getQuery()
+                ->getResult()
+            ;
+    }
 }
