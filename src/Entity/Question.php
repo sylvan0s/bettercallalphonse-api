@@ -21,6 +21,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "normalization_context"={"groups"={"questionRead"}},
  *      "access_control_message"="Only collab can see all questions."
  *    },
+ *    "admin_get"={
+ *      "method"="GET",
+ *      "path"="admin/questions.{_format}",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "normalization_context"={"groups"={"questionRead"}},
+ *      "access_control_message"="Only admin can see all questions."
+ *    },
  *    "post"={
  *      "method"="POST",
  *      "access_control"="is_granted('ROLE_ADMIN')",
@@ -73,6 +80,11 @@ class Question
     * @Groups({"questionRead"})
     */
     private $questionChoices;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     */
+    private $enabled;
 
     public function __construct()
     {
@@ -135,6 +147,18 @@ class Question
                 $questionChoice->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }
