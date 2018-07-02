@@ -19,32 +19,19 @@ class UserQuestionChoiceRepository extends ServiceEntityRepository
         parent::__construct($registry, UserQuestionChoice::class);
     }
 
-//    /**
-//     * @return UserQuestionChoice[] Returns an array of UserQuestionChoice objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findElement($criteria)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.user = :user')
+            ->andWhere('q.questionChoice = :questionChoice')
+            ->andWhere('q.question = :question')
+            ->andWhere('DATE_FORMAT(q.creationDate, \'%Y-%m\') = DATE_FORMAT(:dateCreation,  \'%Y-%m\')')
+            ->setParameter('user', $criteria['user'])
+            ->setParameter('question', $criteria['question'])
+            ->setParameter('questionChoice', $criteria['questionChoice'])
+            ->setParameter('dateCreation', $criteria['creationDate'])
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?UserQuestionChoice
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
