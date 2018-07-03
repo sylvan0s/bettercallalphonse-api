@@ -60,12 +60,12 @@ class UserQestionChoiceListener implements EventSubscriberInterface
         $controller = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
         $questionChoices = [];
-        $isContaine = $controller->getQuestion()->getQuestionChoices()->contains($controller->getQuestionChoice());
 
         if (!$controller instanceof UserQuestionChoice || (Request::METHOD_POST !== $method && Request::METHOD_PUT
                 !== $method)) {
             return;
         }
+        $isContaine = $controller->getQuestion()->getQuestionChoices()->contains($controller->getQuestionChoice());
 
         if(Request::METHOD_POST === $method) {
             $creationDate = (new \DateTime('now'));
