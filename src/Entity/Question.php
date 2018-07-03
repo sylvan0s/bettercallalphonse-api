@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  attributes={
  *    "normalization_context"={"groups"={"questionRead"}},
@@ -20,6 +21,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="GET",
  *      "normalization_context"={"groups"={"questionRead"}},
  *      "access_control_message"="Only collab can see all questions."
+ *    },
+ *    "admin_get"={
+ *      "method"="GET",
+ *      "path"="admin/questions.{_format}",
+ *      "access_control"="is_granted('ROLE_ADMIN')",
+ *      "normalization_context"={"groups"={"questionRead"}},
+ *      "access_control_message"="Only admin can see all questions."
  *    },
  *    "post"={
  *      "method"="POST",
@@ -46,7 +54,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  }
  *)
  */
-class Question
+class Question extends EntityBase
 {
     /**
      * @ORM\Id()
@@ -73,6 +81,18 @@ class Question
     * @Groups({"questionRead"})
     */
     private $questionChoices;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     * @Groups({"questionWrite"})
+     */
+    private $enabled;
+
+    /**
+     * @ORM\Column(type="integer", options={"default":1})
+     * @Groups({"questionWrite"})
+     */
+    private $ordered;
 
     public function __construct()
     {
@@ -135,6 +155,30 @@ class Question
                 $questionChoice->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getOrdered(): ?int
+    {
+        return $this->ordered;
+    }
+
+    public function setOrdered(int $ordered): self
+    {
+        $this->ordered = $ordered;
 
         return $this;
     }
