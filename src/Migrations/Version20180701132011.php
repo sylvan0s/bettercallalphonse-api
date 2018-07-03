@@ -15,7 +15,7 @@ class Version20180701132011 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE question ADD creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD update_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP');
+        $this->addSql('ALTER TABLE question ADD creation_date DATETIME NOT NULL, ADD update_date DATETIME NOT NULL');
     }
 
     public function down(Schema $schema)
