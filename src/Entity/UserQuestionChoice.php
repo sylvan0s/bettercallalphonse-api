@@ -69,7 +69,7 @@ class UserQuestionChoice extends EntityBase
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups({"questionRead", "user_question_choiceRead",
-     *     "user_question_choiceWrite", "userRead"})
+     *     "user_question_choiceWrite", "userRead", "my_user_question_choiceRead"})
      */
     private $id;
 

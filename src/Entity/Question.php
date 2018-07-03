@@ -84,13 +84,13 @@ class Question extends EntityBase
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
-     * @Groups({"questionWrite"})
+     * @Groups({"questionRead", "questionWrite"})
      */
     private $enabled;
 
     /**
      * @ORM\Column(type="integer", options={"default":1})
-     * @Groups({"questionWrite"})
+     * @Groups({"questionRead", "questionWrite"})
      */
     private $ordered;
 
