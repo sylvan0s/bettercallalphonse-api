@@ -61,14 +61,14 @@ class QuestionChoice
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "user_question_choiceRead",
-     *     "collabs_user_question_choiceRead"})
+     *     "collabs_user_question_choiceRead", "my_user_question_choiceRead"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "user_question_choiceRead",
-     *     "collabs_user_question_choiceRead"})
+     *     "collabs_user_question_choiceRead", "my_user_question_choiceRead"})
      */
     private $note;
 
