@@ -40,7 +40,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="POST",
  *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owner can post an user question choice."
- *    }
+ *    },
+ *     "choices_grouped_by_id_question"={
+ *          "route_name"="choices_grouped_by_id_question"
+ *      }
  *  },
  *  itemOperations={
  *    "get"={
