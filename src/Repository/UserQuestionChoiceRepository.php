@@ -34,4 +34,20 @@ class UserQuestionChoiceRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function GetChoicesGroupedByIdQuestion($criteria)
+    {
+        return $this->createQueryBuilder('uqc')
+                    ->select('qc.id, qc.libelle, DATE_FORMAT(uqc.creationDate, \'%Y-%m\') fCreationDate, COUNT(\'qc.id\') nbElement')
+                    ->join('uqc.questionChoice', 'qc')
+                    ->join('uqc.question', 'q')
+                    ->where('q.id = :id')
+                    ->andWhere('uqc.creationDate >= :since')
+                    ->setParameter('id', $criteria['idQuestion'])
+                    ->setParameter('since', $criteria['since'])
+                    ->groupBy('qc.id, qc.libelle, fCreationDate')
+                    ->orderBy('fCreationDate', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
 }
