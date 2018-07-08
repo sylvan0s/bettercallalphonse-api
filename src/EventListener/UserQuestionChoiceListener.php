@@ -13,10 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class UserQestionChoiceListener implements EventSubscriberInterface
+class UserQuestionChoiceListener implements EventSubscriberInterface
 {
 
-    private $userQestionChoiceRepository;
+    private $userQuestionChoiceRepository;
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager, UserQuestionChoiceRepository
@@ -24,7 +24,7 @@ class UserQestionChoiceListener implements EventSubscriberInterface
     {
         $this->entityManager = $entityManager;
         /** @var \App\Repository\UserQuestionChoiceRepository userQestionChoiceRepository */
-        $this->userQestionChoiceRepository = $userQuestionChoiceRepository;
+        $this->userQuestionChoiceRepository = $userQuestionChoiceRepository;
     }
 
     /**
@@ -76,7 +76,7 @@ class UserQestionChoiceListener implements EventSubscriberInterface
                 'creationDate' => $creationDate
             ];
 
-            $questionChoices = $this->userQestionChoiceRepository->findElement($criteria);
+            $questionChoices = $this->userQuestionChoiceRepository->findElement($criteria);
         }
 
         if (count($questionChoices) > 0 || !$isContaine) {

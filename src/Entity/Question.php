@@ -14,7 +14,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "normalization_context"={"groups"={"questionRead"}},
- *    "denormalization_context"={"groups"={"questionWrite"}}
+ *    "denormalization_context"={"groups"={"questionWrite"}},
+ *    "order"={"ordered": "ASC"}
  *  },
  *  collectionOperations={
  *    "get"={

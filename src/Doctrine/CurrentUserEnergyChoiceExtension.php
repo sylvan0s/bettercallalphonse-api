@@ -8,18 +8,15 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInter
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\User;
-use App\Entity\UserQuestionChoice;
+use App\Entity\UserEnergyChoice;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-final class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+final class CurrentUserEnergyChoiceExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     const MY_QUESTION_CHOICES_GET_COLLECTION = "api_user_question_choices_my_collection";
-    const COLLABS_QUESTION_CHOICES_GET_COLLECTION = "api_user_question_choices_collabs_collection";
-    const ALL_USERS_GET_COLLECTION = "api_users_all_collection";
 
     private $tokenStorage;
     private $authorizationChecker;
@@ -63,7 +60,7 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
         $user = $this->tokenStorage->getToken()->getUser();
 
         if ($user instanceof User
-            && (User::class === $resourceClass)
+            && (UserEnergyChoice::class === $resourceClass)
             && !$this->authorizationChecker->isGranted(User::ROLE_ADMIN)
           ) {
             if ($parameters['_route'] !== self::ALL_USERS_GET_COLLECTION) {
@@ -71,19 +68,6 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
               $queryBuilder->andWhere(sprintf('%s.id = :current_user', $rootAlias));
               $queryBuilder->setParameter('current_user', $user->getId());
             }
-        }
-
-        if ($user instanceof User
-            && UserQuestionChoice::class === $resourceClass
-            && in_array($parameters['_route'], [self::MY_QUESTION_CHOICES_GET_COLLECTION,
-                self::COLLABS_QUESTION_CHOICES_GET_COLLECTION]) ) {
-            $rootAlias = $queryBuilder->getRootAliases()[0];
-            if($parameters['_route'] === self::MY_QUESTION_CHOICES_GET_COLLECTION) {
-                $queryBuilder->andWhere(sprintf('%s.user = :current_user', $rootAlias));
-            } else {
-                $queryBuilder->andWhere(sprintf('%s.user != :current_user', $rootAlias));
-            }
-            $queryBuilder->setParameter('current_user', $user->getId());
         }
     }
 }

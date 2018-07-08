@@ -19,32 +19,18 @@ class UserEnergyChoiceRepository extends ServiceEntityRepository
         parent::__construct($registry, UserEnergyChoice::class);
     }
 
-//    /**
-//     * @return UserEnergyChoice[] Returns an array of UserEnergyChoice objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function GetEnergyAvgGroupedDay($criteria)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?UserEnergyChoice
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $uQuery = $this->createQueryBuilder('ue');
+        return $uQuery
+                    ->select('DATE_FORMAT(ue.creationDate, \'%Y-%m-%d\') creationDate, '.
+                                $uQuery->expr()->avg('ue.note') . ' AS weightedScore')
+                    ->andWhere('DATE_FORMAT(ue.creationDate, \'%Y-%m-%d\') >= DATE_FORMAT(:since, \'%Y-%m-%d\')')
+                    ->setParameter('since', $criteria['since'])
+                    ->groupBy('creationDate')
+                    ->orderBy('creationDate', 'ASC')
+                    ->getQuery()
+                    ->getResult();
     }
-    */
 }

@@ -63,6 +63,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class User extends BaseUser
 {
+    const ROLE_ADMIN = "ROLE_ADMIN";
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
