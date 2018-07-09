@@ -45,7 +45,7 @@ class UserQuestionChoiceRepository extends ServiceEntityRepository
                     ->setParameter('id', $criteria['idQuestion'])
                     ->setParameter('since', $criteria['since'])
                     ->groupBy('qc.id, qc.libelle, creationDate')
-                    ->orderBy('creationDate', 'ASC')
+                    ->orderBy('creationDate, qc.id', 'ASC')
                     ->getQuery()
                     ->getResult();
     }
