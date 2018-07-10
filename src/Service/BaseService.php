@@ -6,7 +6,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ServiceBase
+class BaseService
 {
     protected $userManager;
     protected $stokenStorage;
@@ -48,5 +48,20 @@ class ServiceBase
         }
 
         return $user;
+    }
+
+    protected function getStart($month, $interval)
+    {
+        // Initialisation
+        $plage = new \DateInterval($interval);
+        $plage->invert = 1; //Make it negative.
+        return  $month->add($plage);
+    }
+
+    protected function getStartOfMonth($month, $interval)
+    {
+        $since = $this->getStart($month, $interval);
+
+        return $since->modify('first day of this month');
     }
 }

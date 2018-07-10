@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     "denormalization_context"={"groups"={"user_energy_choiceWrite"}}
  *  },
  *  collectionOperations={
+ *
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_energy_choiceRead"}},
@@ -26,7 +27,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "method"="POST",
  *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owner can add an user energy choice.",
+ *    },
+ *    "api_admin_energy_avg_Grouped_by_day"={
+ *      "route_name"="api_admin_energy_avg_Grouped_by_day"
+ *    },
+ *    "api_energy_avg_Grouped_by_day"={
+ *      "route_name"="api_energy_avg_Grouped_by_day"
  *    }
+ *
  *  },
  *  itemOperations={
  *    "get"={
