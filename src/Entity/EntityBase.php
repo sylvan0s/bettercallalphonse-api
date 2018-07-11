@@ -13,7 +13,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 abstract class EntityBase
 {
     const PERIODICITY_0_DAY = 'P0D';
+    const PERIODICITY_7_DAY = 'P7D';
     const PERIODICITY_10_DAY = 'P10D';
+    const PERIODICITY_3_MONTH = 'P3M';
     const PERIODICITY_6_MONTH = 'P6M';
     /**
      * @ORM\Column(type="datetime", nullable=false)
