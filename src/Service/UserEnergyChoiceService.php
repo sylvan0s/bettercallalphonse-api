@@ -35,7 +35,7 @@ class UserEnergyChoiceService extends BaseService
             throw new \LogicException('Only admins can see this.');
         }
 
-        $criteria['since'] = $this->getStart(new \DateTime(), EntityBase::PERIODICITY_10_DAY);
+        $criteria['since'] = $this->getStart(new \DateTime(), EntityBase::PERIODICITY_7_DAY);
 
         return $this->userEnergyChoiceRepository->GetEnergyAvgGroupedDay($criteria);
     }
