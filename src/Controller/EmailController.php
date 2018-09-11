@@ -16,8 +16,8 @@ class EmailController extends Controller
     {
       $datas = json_decode($request->getContent());
 
-      $register_email = (new \Swift_Message('Bienvenue sur Better Call Altimate !'))
-                        ->setFrom('jlgd@altimate.pro')
+      $register_email = (new \Swift_Message('Bienvenue sur Better Call Alphonse !'))
+                        ->setFrom('noreply@alphonse.io')
                         ->setTo($datas->email)
                         ->setBody(
                           $this->renderView(
