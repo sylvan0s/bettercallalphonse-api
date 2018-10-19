@@ -17,7 +17,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     "denormalization_context"={"groups"={"user_energy_choiceWrite"}}
  *  },
  *  collectionOperations={
- *
  *    "get"={
  *      "method"="GET",
  *      "normalization_context"={"groups"={"user_energy_choiceRead"}},
@@ -34,7 +33,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    "api_energy_avg_Grouped_by_day"={
  *      "route_name"="api_energy_avg_Grouped_by_day"
  *    }
- *
  *  },
  *  itemOperations={
  *    "get"={
