@@ -46,4 +46,21 @@ class UserEnergyChoiceService extends BaseService
 
         return $this->userEnergyChoiceRepository->GetEnergyAvgGroupedDay($criteria);
     }
+
+    public function getUserHasVotedToday($user)
+    {
+        $criteria = [
+            'since' => $this->getStart(new \DateTime(), EntityBase::PERIODICITY_0_DAY),
+            'user' => $user
+        ];
+
+        return $this->userEnergyChoiceRepository->getUserHasVotedToday($criteria);
+    }
+
+    public function getUserEnergy($user)
+    {
+        $criteria['user'] = $user;
+
+        return $this->userEnergyChoiceRepository->getUserEnergy($criteria);
+    }
 }

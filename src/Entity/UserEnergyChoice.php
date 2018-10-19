@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserEnergyChoiceRepository")
@@ -32,6 +33,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *    },
  *    "api_energy_avg_Grouped_by_day"={
  *      "route_name"="api_energy_avg_Grouped_by_day"
+ *    },
+ *    "api_energy_user_has_voted"={
+ *      "route_name"="api_energy_user_has_voted"
+ *    },
+ *    "api_energy_user_get_energies"={
+ *      "route_name"="api_energy_user_get_energies"
  *    }
  *  },
  *  itemOperations={
@@ -52,7 +59,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "access_control_message"="Only admins can delete an user energy choice."
  *    }
  *  }
- *)
+ * )
+ * @Serializer\ExclusionPolicy("all")
  */
 class UserEnergyChoice extends EntityBase
 {
@@ -61,6 +69,7 @@ class UserEnergyChoice extends EntityBase
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite", "userRead"})
+     * @Serializer\Expose
      */
     private $id;
 
@@ -73,6 +82,7 @@ class UserEnergyChoice extends EntityBase
      *     maxMessage = "You can not have a higher value {{ limit }}"
      * )
      * @Groups({"user_energy_choiceRead", "user_energy_choiceWrite"})
+     * @Serializer\Expose
      */
     private $note;
 

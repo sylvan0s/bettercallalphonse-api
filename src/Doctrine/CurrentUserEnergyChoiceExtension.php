@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class CurrentUserEnergyChoiceExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    const MY_QUESTION_CHOICES_GET_COLLECTION = "api_user_question_choices_my_collection";
+    const MY_ENERGY_OF_TODAY_GET_COLLECTION = "api_energy_user_has_voted";
 
     private $tokenStorage;
     private $authorizationChecker;
@@ -60,14 +60,11 @@ final class CurrentUserEnergyChoiceExtension implements QueryCollectionExtension
         $user = $this->tokenStorage->getToken()->getUser();
 
         if ($user instanceof User
-            && (UserEnergyChoice::class === $resourceClass)
-            && !$this->authorizationChecker->isGranted(User::ROLE_ADMIN)
-          ) {
-            if ($parameters['_route'] !== self::ALL_USERS_GET_COLLECTION) {
-              $rootAlias = $queryBuilder->getRootAliases()[0];
-              $queryBuilder->andWhere(sprintf('%s.id = :current_user', $rootAlias));
-              $queryBuilder->setParameter('current_user', $user->getId());
-            }
+            && UserEnergyChoice::class === $resourceClass
+            && in_array($parameters['_route'], [self::MY_ENERGY_OF_TODAY_GET_COLLECTION]) ) {
+            $rootAlias = $queryBuilder->getRootAliases()[0];
+            $queryBuilder->andWhere(sprintf('%s.user != :current_user', $rootAlias));
+            $queryBuilder->setParameter('current_user', $user->getId());
         }
     }
 }

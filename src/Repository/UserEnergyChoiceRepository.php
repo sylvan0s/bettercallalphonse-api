@@ -33,4 +33,22 @@ class UserEnergyChoiceRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function getUserHasVotedToday($criteria)
+    {
+        return $this->createQueryBuilder('ue')
+                    ->andWhere('DATE_FORMAT(ue.creationDate, \'%Y-%m-%d\') >= DATE_FORMAT(:since, \'%Y-%m-%d\')')
+                    ->andWhere('ue.user = :user')
+                    ->setParameter('since', $criteria['since'])
+                    ->setParameter('user', $criteria['user'])
+                    ->getQuery()
+                    ->getResult();
+    }
+
+
+
+    public function getUserEnergy($criteria)
+    {
+        return $this->findBy(['user' => $criteria['user']]);
+    }
 }
