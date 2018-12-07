@@ -59,13 +59,14 @@ final class CurrentUserEnergyChoiceExtension implements QueryCollectionExtension
         $matcher = $this->router->getMatcher();
         $parameters = $matcher->match($context->getPathInfo());
         $user = $this->tokenStorage->getToken()->getUser();
+
         if ($user instanceof User
             && UserEnergyChoice::class === $resourceClass
-            && in_array($parameters['_route'], [self::MY_ENERGY_OF_TODAY_GET_COLLECTION, self::MY_ENERGY_GET_COLLECTION])
-	) {
+            && in_array($parameters['_route'], [self::MY_ENERGY_OF_TODAY_GET_COLLECTION, self::MY_ENERGY_GET_COLLECTION]) ) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
 	    $queryBuilder->andWhere(sprintf('%s.user = :current_user', $rootAlias));
             $queryBuilder->setParameter('current_user', $user);
         }
     }
 }
+

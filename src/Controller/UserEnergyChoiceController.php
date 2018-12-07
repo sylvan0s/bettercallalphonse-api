@@ -20,18 +20,16 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserEnergyChoiceController
 {
-    private $stokenStorage;
+    private $userEnergyChoiceService;
     private $container;
 
     public function __construct(
         UserEnergyChoiceService $userEnergyChoiceService,
-        TokenStorageInterface $stokenStorage,
         ContainerInterface $container
     )
     {
         /** @var \App\Service\UserEnergyChoiceService userEnergyChoiceService */
         $this->userEnergyChoiceService = $userEnergyChoiceService;
-        $this->stokenStorage = $stokenStorage;
         $this->container = $container;
     }
 
@@ -68,33 +66,6 @@ class UserEnergyChoiceController
     }
 
     /**
-     * Get a user from the Security Token Storage.
-     *
-     * @return mixed
-     *
-     * @throws \LogicException If SecurityBundle is not available
-     *
-     * @see TokenInterface::getUser()
-     */
-    public function getUser()
-    {
-        if (!$this->stokenStorage) {
-            throw new \LogicException('The SecurityBundle is not registered in your application.');
-        }
-
-        if (null === $token = $this->stokenStorage->getToken()) {
-            return;
-        }
-
-        if (!is_object($user = $token->getUser())) {
-            // e.g. anonymous authentication
-            return;
-        }
-
-        return $user;
-    }
-
-    /**
      *
      * @Configuration\Route(
      *     name="api_energy_user_has_voted",
@@ -104,17 +75,9 @@ class UserEnergyChoiceController
      */
     public function getUserHasVotedToday(Request $request)
     {
-        $user = $this->getUser();
+        $result = $this->userEnergyChoiceService->getUserHasVotedToday();
 
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-
-        $result = $this->userEnergyChoiceService->getUserHasVotedToday($user);
-
-        $formattedResult = $this->container->get('jms_serializer')->serialize($result, 'json');
-
-        return new Response($formattedResult, Response::HTTP_OK);
+        return new JsonResponse($result, JsonResponse::HTTP_OK);
     }
 
     /**
@@ -127,21 +90,8 @@ class UserEnergyChoiceController
      */
     public function getUserEnergy(Request $request)
     {
-        $user = $this->getUser();
+        $result = $this->userEnergyChoiceService->getUserEnergy();
 
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-
-        $result = $this->userEnergyChoiceService->getUserEnergy($user);
-
-        $formattedResult = [
-            'result' => $result,
-            'user_id' => $user->getId()
-        ];
-
-        $jsonResult = $this->container->get('jms_serializer')->serialize($formattedResult, 'json');
-
-        return new Response($jsonResult, Response::HTTP_OK);
+        return new JsonResponse($result, JsonResponse::HTTP_OK);
     }
 }
