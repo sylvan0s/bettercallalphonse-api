@@ -12,8 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  attributes={
  *    "force_eager"=false,
- *    "normalization_context"={"groups"={"user_question_choiceRead", "my_user_question_choiceRead",
- *     "collabs_user_question_choiceRead"}},
+ *    "normalization_context"={"groups"={"user_question_choiceRead", "my_user_question_choiceRead", "collabs_user_question_choiceRead"}},
  *    "denormalization_context"={"groups"={"user_question_choiceWrite"}},
  *    "order"={"user.username": "ASC", "creationDate": "ASC"}
  *  },
@@ -41,9 +40,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "access_control"="object.getUser() == user",
  *      "access_control_message"="Only owner can post an user question choice."
  *    },
- *     "api_choices_grouped_by_id_question"={
- *          "route_name"="api_choices_grouped_by_id_question"
- *      }
+ *    "api_choices_grouped_by_id_question"={
+ *      "route_name"="api_choices_grouped_by_id_question"
+ *    }
  *  },
  *  itemOperations={
  *    "get"={
