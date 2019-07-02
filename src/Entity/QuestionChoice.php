@@ -79,13 +79,6 @@ class QuestionChoice
      */
     private $question;
 
-    /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"questionRead", "question_choiceRead", "question_choiceWrite", "user_question_choiceRead",
-     *     "collabs_user_question_choiceRead", "my_user_question_choiceRead"})
-     */
-    private $enabled;
-
     public function getId()
     {
         return $this->id;
@@ -123,18 +116,6 @@ class QuestionChoice
     public function setQuestion(?Question $question): self
     {
         $this->question = $question;
-
-        return $this;
-    }
-
-    public function getEnabled(): ?bool
-    {
-        return $this->enabled;
-    }
-
-    public function setEnabled(bool $enabled): self
-    {
-        $this->enabled = $enabled;
 
         return $this;
     }
