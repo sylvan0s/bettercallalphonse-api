@@ -1098,12 +1098,12 @@
             "version": "v2.6.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "shasum": ""
             },
@@ -1466,12 +1466,12 @@
             "version": "v0.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/gesdinet/JWTRefreshTokenBundle.git",
+                "url": "https://github.com/markitosgv/JWTRefreshTokenBundle.git",
                 "reference": "95292f16e25b06a8d5a5e70c0dc38b2214df8849"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gesdinet/JWTRefreshTokenBundle/zipball/95292f16e25b06a8d5a5e70c0dc38b2214df8849",
+                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/95292f16e25b06a8d5a5e70c0dc38b2214df8849",
                 "reference": "95292f16e25b06a8d5a5e70c0dc38b2214df8849",
                 "shasum": ""
             },
@@ -1855,7 +1855,7 @@
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
                     "email": "lcobucci@gmail.com",
-                    "role": "developer"
+                    "role": "Developer"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",
@@ -3899,16 +3899,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.1.6",
+            "version": "v4.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "d528136617ff24f530e70df9605acc1b788b08d4"
+                "reference": "2ae778ff4a1f8baba7724db1ca977ada3b796749"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/d528136617ff24f530e70df9605acc1b788b08d4",
-                "reference": "d528136617ff24f530e70df9605acc1b788b08d4",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/2ae778ff4a1f8baba7724db1ca977ada3b796749",
+                "reference": "2ae778ff4a1f8baba7724db1ca977ada3b796749",
                 "shasum": ""
             },
             "require": {
@@ -3922,7 +3922,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -3949,7 +3949,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-03T08:48:45+00:00"
+            "time": "2019-11-11T12:54:47+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -4174,6 +4174,17 @@
         {
             "name": "symfony/lts",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/lts.git",
+                "reference": "c1affae45b78aee036effa1759237e7fa96d4af2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/lts/zipball/c1affae45b78aee036effa1759237e7fa96d4af2",
+                "reference": "c1affae45b78aee036effa1759237e7fa96d4af2",
+                "shasum": ""
+            },
             "conflict": {
                 "symfony/asset": ">=5",
                 "symfony/browser-kit": ">=5",
@@ -4584,16 +4595,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.9.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8"
+                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d0cd638f4634c16d8df4508e847f14e9e43168b8",
-                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
+                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
                 "shasum": ""
             },
             "require": {
@@ -4605,7 +4616,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -4639,7 +4650,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-08-06T14:22:27+00:00"
+            "time": "2019-11-27T14:18:11+00:00"
         },
         {
             "name": "symfony/property-access",
